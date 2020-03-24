@@ -17,6 +17,10 @@ export class SubstrateWallet implements Wallet {
     return Address.from(Bytes.from(this.keyPair.publicKey).toHexString())
   }
 
+  /**
+   * get balance of Layer 1
+   * @param tokenAddress specify token address. If it's not provided, getL1Balance returns default token balance.
+   */
   public async getL1Balance(tokenAddress?: Address): Promise<Balance> {
     return new Balance(BigNumber.from(0), 0, '')
   }
