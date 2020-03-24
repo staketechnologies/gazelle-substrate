@@ -32,6 +32,7 @@
     "@cryptoeconomicslab/ovm": "0.0.38",
     "@cryptoeconomicslab/plasma": "0.0.38",
     "@cryptoeconomicslab/primitives": "0.0.38",
+    "@cryptoeconomicslab/wallet": "0.0.38",
     "jsbi": "^3.1.2"
   },
   "devDependencies": {
