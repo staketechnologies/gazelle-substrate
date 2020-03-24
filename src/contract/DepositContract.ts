@@ -24,13 +24,13 @@ import {
  * DepositContract class is the wrapper to access Deposit Contract.
  */
 export class DepositContract implements IDepositContract {
-  registry: TypeRegistry
-  contractId: AccountId
-  eventWatcher: EventWatcher
+  private registry: TypeRegistry
+  private contractId: AccountId
+  private eventWatcher: EventWatcher
 
   constructor(
     readonly address: Address,
-    eventDb: KeyValueStore,
+    readonly eventDb: KeyValueStore,
     readonly api: ApiPromise,
     readonly operatorKeyPair: KeyringPair
   ) {
