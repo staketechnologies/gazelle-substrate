@@ -4,9 +4,18 @@ import AccountId from '@polkadot/types/primitive/Generic/AccountId'
 import { TypeRegistry, U256, H256 } from '@polkadot/types'
 import { Codec } from '@polkadot/types/types'
 import { ICommitmentContract, EventLog } from '@cryptoeconomicslab/contract'
-import { Address, BigNumber, Bytes } from '@cryptoeconomicslab/primitives'
+import {
+  Address,
+  BigNumber,
+  Bytes,
+  Codable
+} from '@cryptoeconomicslab/primitives'
 import { KeyValueStore } from '@cryptoeconomicslab/db'
 import EventWatcher from '../events/SubstrateEventWatcher'
+import {
+  encodeToPolcadotCodec,
+  decodeFromPolcadotCodec
+} from '../coder/PolcadotCoder'
 
 export class CommitmentContract implements ICommitmentContract {
   registry: TypeRegistry
@@ -38,10 +47,8 @@ export class CommitmentContract implements ICommitmentContract {
     await this.api.tx.commitment
       .submitRoot(
         this.contractId,
-        blockNumber.raw,
-        root.toHexString()
-        // new U256(this.registry, blockNumber.raw),
-        // new H256(this.registry, root.toHexString())
+        encodeToPolcadotCodec(this.registry, blockNumber),
+        encodeToPolcadotCodec(this.registry, root)
       )
       .signAndSend(this.operatorKeyPair, {})
   }
@@ -63,7 +70,7 @@ export class CommitmentContract implements ICommitmentContract {
   async getRoot(blockNumber: BigNumber): Promise<Bytes> {
     const root = await this.api.query.commitment.getRoot(
       this.contractId,
-      Bytes.fromHexString(blockNumber.toHexString()).data
+      encodeToPolcadotCodec(this.registry, blockNumber)
     )
     return Bytes.fromHexString(root.toHex())
   }
@@ -79,8 +86,12 @@ export class CommitmentContract implements ICommitmentContract {
       const blockNumber: Codec = log.values[0]
       const root: Codec = log.values[1]
       handler(
-        BigNumber.fromHexString(blockNumber.toHex()),
-        Bytes.fromHexString(root.toHex())
+        decodeFromPolcadotCodec(
+          this.registry,
+          BigNumber.default(),
+          blockNumber
+        ) as BigNumber,
+        decodeFromPolcadotCodec(this.registry, Bytes.default(), root) as Bytes
       )
     })
   }
