@@ -60,11 +60,15 @@ export function getTypeString(
   )
 }
 
-interface A {
-  toU8a(): Uint8Array
-}
-
-function innerEncode(registry: TypeRegistry, input: Codable): A {
+/**
+ * encode @cryptoeconomicslab/primitives/Codable to @polkadot/types/types/Codec
+ * @param registry
+ * @param input
+ */
+export function encodeToPolcadotCodec(
+  registry: TypeRegistry,
+  input: Codable
+): Codec {
   if (input instanceof Address) {
     throw new Error(`Address doesn't support yet`)
   } else if (input instanceof Bytes) {
@@ -81,19 +85,19 @@ function innerEncode(registry: TypeRegistry, input: Codable): A {
     return new types.Vec(
       registry,
       getVecType(input),
-      input.data.map(d => innerEncode(registry, d))
+      input.data.map(d => encodeToPolcadotCodec(registry, d))
     )
   } else if (input instanceof Tuple) {
     return new types.Tuple(
       registry,
       getTupleType(input),
-      input.data.map(d => innerEncode(registry, d))
+      input.data.map(d => encodeToPolcadotCodec(registry, d))
     )
   } else if (input instanceof Struct) {
     return new types.Tuple(
       registry,
       getTupleType(input),
-      input.data.map(d => innerEncode(registry, d.value))
+      input.data.map(d => encodeToPolcadotCodec(registry, d.value))
     )
   }
   throw new Error(
@@ -101,7 +105,13 @@ function innerEncode(registry: TypeRegistry, input: Codable): A {
   )
 }
 
-function decodeInner(
+/**
+ * decode @polkadot/types/types/Codec to @cryptoeconomicslab/primitives/Codable
+ * @param registry
+ * @param definition
+ * @param data
+ */
+export function decodeFromPolcadotCodec(
   registry: TypeRegistry,
   definition: Codable,
   data: any
@@ -125,13 +135,15 @@ function decodeInner(
     const arr = data as any[]
     return List.from(
       definition.getC().default(),
-      arr.map(c => decodeInner(registry, definition.getC().default(), c))
+      arr.map(c =>
+        decodeFromPolcadotCodec(registry, definition.getC().default(), c)
+      )
     )
   } else if (definition instanceof Tuple) {
     const tuple = data as types.Tuple
     return Tuple.from(
       tuple.map((c, index) => {
-        return decodeInner(registry, definition.data[index], c)
+        return decodeFromPolcadotCodec(registry, definition.data[index], c)
       })
     )
   } else if (definition instanceof Struct) {
@@ -140,7 +152,11 @@ function decodeInner(
       tuple.map((c, index) => {
         return {
           key: definition.data[index].key,
-          value: decodeInner(registry, definition.data[index].value, c)
+          value: decodeFromPolcadotCodec(
+            registry,
+            definition.data[index].value,
+            c
+          )
         }
       })
     )
@@ -175,7 +191,7 @@ export const PolcadotCoder: Coder = {
    */
   encode(input: Codable): Bytes {
     const registry = new TypeRegistry()
-    return Bytes.from(innerEncode(registry, input).toU8a())
+    return Bytes.from(encodeToPolcadotCodec(registry, input).toU8a())
   },
   /**
    * decode given hex string into given codable object
@@ -184,7 +200,11 @@ export const PolcadotCoder: Coder = {
    */
   decode<T extends Codable>(d: T, data: Bytes): T {
     const registry = new TypeRegistry()
-    return decodeInner(registry, d, innerDecode(registry, d, data)) as T
+    return decodeFromPolcadotCodec(
+      registry,
+      d,
+      innerDecode(registry, d, data)
+    ) as T
   }
 }
 
