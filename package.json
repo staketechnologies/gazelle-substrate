@@ -10,6 +10,7 @@
   "scripts": {
     "build": "tsc --build ./tsconfig.json",
     "build:check": "tsc --noEmit",
+    "doc": "typedoc --excludeNotExported --excludePrivate --out docs src",
     "test": "jest",
     "lint": "eslint --ext ts,tsx src",
     "prepare": "npm run build"
@@ -25,14 +26,14 @@
   },
   "homepage": "https://github.com/staketechnologies/wakkanay-substrate#readme",
   "dependencies": {
-    "@polkadot/api": "^0.100.1",
-    "@polkadot/keyring": "^1.8.1",
     "@cryptoeconomicslab/contract": "0.0.38",
     "@cryptoeconomicslab/db": "0.0.38",
     "@cryptoeconomicslab/ovm": "0.0.38",
     "@cryptoeconomicslab/plasma": "0.0.38",
     "@cryptoeconomicslab/primitives": "0.0.38",
     "@cryptoeconomicslab/wallet": "0.0.38",
+    "@polkadot/api": "^0.100.1",
+    "@polkadot/keyring": "^1.8.1",
     "jsbi": "^3.1.2"
   },
   "devDependencies": {
@@ -47,6 +48,7 @@
     "prettier": "^1.18.2",
     "ts-jest": "^24.1.0",
     "ts-node": "^8.4.1",
+    "typedoc": "^0.16.6",
     "typescript": "^3.6.4"
   },
   "peerDependencies": {

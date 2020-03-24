@@ -4,12 +4,7 @@ import AccountId from '@polkadot/types/primitive/Generic/AccountId'
 import { TypeRegistry, U256, H256 } from '@polkadot/types'
 import { Codec } from '@polkadot/types/types'
 import { ICommitmentContract, EventLog } from '@cryptoeconomicslab/contract'
-import {
-  Address,
-  BigNumber,
-  Bytes,
-  Codable
-} from '@cryptoeconomicslab/primitives'
+import { Address, BigNumber, Bytes } from '@cryptoeconomicslab/primitives'
 import { KeyValueStore } from '@cryptoeconomicslab/db'
 import EventWatcher from '../events/SubstrateEventWatcher'
 import {
@@ -18,13 +13,13 @@ import {
 } from '../coder/PolcadotCoder'
 
 export class CommitmentContract implements ICommitmentContract {
-  registry: TypeRegistry
-  contractId: AccountId
-  eventWatcher: EventWatcher
+  private registry: TypeRegistry
+  private contractId: AccountId
+  private eventWatcher: EventWatcher
 
   constructor(
     readonly address: Address,
-    eventDb: KeyValueStore,
+    readonly eventDb: KeyValueStore,
     readonly api: ApiPromise,
     readonly operatorKeyPair: KeyringPair
   ) {

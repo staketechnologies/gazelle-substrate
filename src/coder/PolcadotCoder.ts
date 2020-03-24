@@ -25,11 +25,11 @@ import { Constructor, Codec } from '@polkadot/types/types'
  */
 type TypeString = 'AccountId' | 'u128' | 'Vec<u8>'
 
-export function getVecType<T extends Codable>(l: List<T>): any {
+function getVecType<T extends Codable>(l: List<T>): any {
   return getTypeString(l.getC().default())
 }
 
-export function getTupleType(t: Tuple | Struct) {
+function getTupleType(t: Tuple | Struct) {
   if (t instanceof Tuple) {
     return t.data.map(r => getTypeString(r))
   } else if (t instanceof Struct) {
@@ -39,7 +39,7 @@ export function getTupleType(t: Tuple | Struct) {
   }
 }
 
-export function getTypeString(
+function getTypeString(
   v: Codable
 ): TypeString | Constructor<types.Tuple> | Constructor<types.Vec<Codec>> {
   if (v instanceof Address) {
