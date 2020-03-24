@@ -25,3 +25,16 @@ npm test
 
 - [Document root of framework](https://github.com/cryptoeconomicslab/ovm-plasma-chamber-spec)
 - [API Reference of Substrate L1 Adaptor](https://cryptoeconomicslab.github.io/wakkanay-substrate/)
+
+### Contributing
+
+When contributing to this repository, please first discuss the change you wish to make via issue or any other method with the owners of this repository before making a change.
+
+Please note we have [a code of conduct](https://github.com/cryptoeconomicslab/ovm-plasma-chamber-spec/blob/master/CODE-OF-CONDUCT.md), please follow it in all your interactions with the project.
+
+1.  Ensure that tests pass and code is lint free: `npm run lint`
+2.  Update the README.md if any changes invalidate its current content.
+3.  Include any tests for new functionality.
+4.  Reference any revelant issues in your PR comment.
+
+NOTE: Be sure to merge the latest from "upstream" before making a pull request!
