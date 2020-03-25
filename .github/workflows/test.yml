@@ -60,4 +60,4 @@ jobs:
           npm install -g lerna
           npm install --frozen-lockfile
           lerna bootstrap
-          npm run build:check
+          npm run build

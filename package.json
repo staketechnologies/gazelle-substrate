@@ -9,10 +9,11 @@
   ],
   "scripts": {
     "build": "lerna run build",
-    "build:check": "tsc --noEmit",
+    "build:check": "lerna run build:check",
+    "clean": "lerna run clean",
     "doc": "typedoc --excludeNotExported --excludePrivate --out docs packages/**/src",
     "test": "npm run build && jest",
-    "lint": "eslint --ext ts,tsx src"
+    "lint": "lerna run lint"
   },
   "repository": {
     "type": "git",
