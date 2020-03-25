@@ -26,7 +26,8 @@
     "build:check": "tsc --noEmit",
     "lint": "eslint --ext ts,tsx src",
     "lint:fix": "eslint --ext ts,tsx src --fix",
-    "clean": "rm -rf lib docs"
+    "clean": "rm -rf lib docs",
+    "start": "node lib/index"
   },
   "dependencies": {
     "@cryptoeconomicslab/contract": "0.0.38",

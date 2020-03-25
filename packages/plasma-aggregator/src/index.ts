@@ -31,10 +31,12 @@ const instantiate = async (): Promise<Aggregator> => {
   )
   await kvs.open()
 
-  const seed = stringToU8a('12345678901234567890123456789012')
+  const seed = stringToU8a(
+    process.env.AGGREGATOR_PRIVATE_KEY || '12345678901234567890123456789012'
+  )
   const keyring = new Keyring({ ss58Format: 42, type: 'ed25519' })
   keyring.addFromSeed(seed, {})
-  const apiPromise = new ApiPromise()
+  const apiPromise = new ApiPromise({})
 
   const wallet = new SubstrateWallet(keyring)
 
@@ -63,23 +65,23 @@ const instantiate = async (): Promise<Aggregator> => {
     )
   }
 
-  return new Aggregator(
+  const config = loadConfigFile(process.env.CONFIG_FILE || 'config.local.json')
+  const aggregator = new Aggregator(
     wallet,
     stateManager,
     blockManager,
     witnessDb,
     depositContractFactory,
     commitmentContractFactory,
-    loadConfigFile(process.env.CONFIG_FILE || 'config.local.json'),
-    { isSubmitter: true }
+    config,
+    { isSubmitter: true, port: Number(process.env.PORT || 3000) }
   )
+  aggregator.registerToken(Address.from(config.payoutContracts.DepositContract))
+  return aggregator
 }
 
 async function main() {
   const aggregator = await instantiate()
-  aggregator.registerToken(
-    Address.from(process.env.DEPOSIT_CONTRACT_ADDRESS as string)
-  )
   aggregator.run()
   console.log('aggregator is running on port ', process.env.PORT)
 }
