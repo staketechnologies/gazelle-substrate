@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SubstrateWallet | wakkanay-substrate</title>
+	<title>OwnershipPayoutContract | wakkanay-substrate</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_wallet_substratewallet_.html">&quot;wallet/SubstrateWallet&quot;</a>
+					<a href="../modules/_contract_ownershippayoutcontract_.html">&quot;contract/OwnershipPayoutContract&quot;</a>
 				</li>
 				<li>
-					<a href="_wallet_substratewallet_.substratewallet.html">SubstrateWallet</a>
+					<a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html">OwnershipPayoutContract</a>
 				</li>
 			</ul>
-			<h1>Class SubstrateWallet</h1>
+			<h1>Class OwnershipPayoutContract</h1>
 		</div>
 	</div>
 </header>
@@ -71,14 +71,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">SubstrateWallet</span>
+						<span class="target">OwnershipPayoutContract</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><span class="tsd-signature-type">Wallet</span></li>
+					<li><span class="tsd-signature-type">IOwnershipPayoutContract</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -88,22 +88,21 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_wallet_substratewallet_.substratewallet.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_wallet_substratewallet_.substratewallet.html#keyring" class="tsd-kind-icon">keyring</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html#address" class="tsd-kind-icon">address</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html#api" class="tsd-kind-icon">api</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html#operatorkeypair" class="tsd-kind-icon">operator<wbr>Key<wbr>Pair</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_wallet_substratewallet_.substratewallet.html#getaddress" class="tsd-kind-icon">get<wbr>Address</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_wallet_substratewallet_.substratewallet.html#getl1balance" class="tsd-kind-icon">get<wbr>L1Balance</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_wallet_substratewallet_.substratewallet.html#signmessage" class="tsd-kind-icon">sign<wbr>Message</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_wallet_substratewallet_.substratewallet.html#verifymysignature" class="tsd-kind-icon">verify<wbr>MySignature</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html#finalizeexit" class="tsd-kind-icon">finalize<wbr>Exit</a></li>
 							</ul>
 						</section>
 					</div>
@@ -115,22 +114,28 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Substrate<wbr>Wallet<span class="tsd-signature-symbol">(</span>keyring<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Keyring</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_wallet_substratewallet_.substratewallet.html" class="tsd-signature-type">SubstrateWallet</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Ownership<wbr>Payout<wbr>Contract<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span>, api<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ApiPromise</span>, operatorKeyPair<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyringPair</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html" class="tsd-signature-type">OwnershipPayoutContract</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/wallet/SubstrateWallet.ts#L7">wallet/SubstrateWallet.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/OwnershipPayoutContract.ts#L13">contract/OwnershipPayoutContract.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>keyring: <span class="tsd-signature-type">Keyring</span></h5>
+									<h5>address: <span class="tsd-signature-type">Address</span></h5>
+								</li>
+								<li>
+									<h5>api: <span class="tsd-signature-type">ApiPromise</span></h5>
+								</li>
+								<li>
+									<h5>operatorKeyPair: <span class="tsd-signature-type">KeyringPair</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_wallet_substratewallet_.substratewallet.html" class="tsd-signature-type">SubstrateWallet</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html" class="tsd-signature-type">OwnershipPayoutContract</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -138,12 +143,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="keyring" class="tsd-anchor"></a>
-					<h3>keyring</h3>
-					<div class="tsd-signature tsd-kind-icon">keyring<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Keyring</span></div>
+					<a name="address" class="tsd-anchor"></a>
+					<h3>address</h3>
+					<div class="tsd-signature tsd-kind-icon">address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Address</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/wallet/SubstrateWallet.ts#L9">wallet/SubstrateWallet.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/OwnershipPayoutContract.ts#L16">contract/OwnershipPayoutContract.ts:16</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="api" class="tsd-anchor"></a>
+					<h3>api</h3>
+					<div class="tsd-signature tsd-kind-icon">api<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ApiPromise</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/OwnershipPayoutContract.ts#L17">contract/OwnershipPayoutContract.ts:17</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="operatorkeypair" class="tsd-anchor"></a>
+					<h3>operator<wbr>Key<wbr>Pair</h3>
+					<div class="tsd-signature tsd-kind-icon">operator<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">KeyringPair</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/OwnershipPayoutContract.ts#L18">contract/OwnershipPayoutContract.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -151,117 +176,46 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getaddress" class="tsd-anchor"></a>
-					<h3>get<wbr>Address</h3>
+					<a name="finalizeexit" class="tsd-anchor"></a>
+					<h3>finalize<wbr>Exit</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Address<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span></li>
+						<li class="tsd-signature tsd-kind-icon">finalize<wbr>Exit<span class="tsd-signature-symbol">(</span>depositContractAddress<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span>, exitProperty<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Property</span>, depositedRangeId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BigNumber</span>, owner<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/wallet/SubstrateWallet.ts#L16">wallet/SubstrateWallet.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/OwnershipPayoutContract.ts#L32">contract/OwnershipPayoutContract.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>get address of wallet</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Address</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getl1balance" class="tsd-anchor"></a>
-					<h3>get<wbr>L1Balance</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>L1Balance<span class="tsd-signature-symbol">(</span>tokenAddress<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Balance</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/wallet/SubstrateWallet.ts#L24">wallet/SubstrateWallet.ts:24</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>get balance of Layer 1</p>
-								</div>
+								<dl class="tsd-comment-tags">
+									<dt>name</dt>
+									<dd><p>finalizeExit</p>
+									</dd>
+									<dt>description</dt>
+									<dd><p>finalize exit claim with ownership StateObject</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> tokenAddress: <span class="tsd-signature-type">Address</span></h5>
+									<h5>depositContractAddress: <span class="tsd-signature-type">Address</span></h5>
+								</li>
+								<li>
+									<h5>exitProperty: <span class="tsd-signature-type">Property</span></h5>
+								</li>
+								<li>
+									<h5>depositedRangeId: <span class="tsd-signature-type">BigNumber</span></h5>
+								</li>
+								<li>
+									<h5>owner: <span class="tsd-signature-type">Address</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>specify token address. If it&#39;s not provided, getL1Balance returns default token balance.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Balance</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="signmessage" class="tsd-anchor"></a>
-					<h3>sign<wbr>Message</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">sign<wbr>Message<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Bytes</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Bytes</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/wallet/SubstrateWallet.ts#L32">wallet/SubstrateWallet.ts:32</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>signMessage signed a hex string message</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>message: <span class="tsd-signature-type">Bytes</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>is hex string</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Bytes</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="verifymysignature" class="tsd-anchor"></a>
-					<h3>verify<wbr>MySignature</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">verify<wbr>MySignature<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Bytes</span>, signature<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Bytes</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/wallet/SubstrateWallet.ts#L39">wallet/SubstrateWallet.ts:39</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>verify signature with publickey of keyPair</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>message: <span class="tsd-signature-type">Bytes</span></h5>
-								</li>
-								<li>
-									<h5>signature: <span class="tsd-signature-type">Bytes</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -291,7 +245,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_contract_erc20contract_.html">&quot;contract/ERC20<wbr>Contract&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_contract_ownershippayoutcontract_.html">&quot;contract/<wbr>Ownership<wbr>Payout<wbr>Contract&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -303,7 +257,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_wallet_substratewallet_.html">&quot;wallet/<wbr>Substrate<wbr>Wallet&quot;</a>
 					</li>
 				</ul>
@@ -313,25 +267,22 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_wallet_substratewallet_.substratewallet.html" class="tsd-kind-icon">Substrate<wbr>Wallet</a>
+						<a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html" class="tsd-kind-icon">Ownership<wbr>Payout<wbr>Contract</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_wallet_substratewallet_.substratewallet.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_wallet_substratewallet_.substratewallet.html#keyring" class="tsd-kind-icon">keyring</a>
+								<a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html#address" class="tsd-kind-icon">address</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html#api" class="tsd-kind-icon">api</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html#operatorkeypair" class="tsd-kind-icon">operator<wbr>Key<wbr>Pair</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_wallet_substratewallet_.substratewallet.html#getaddress" class="tsd-kind-icon">get<wbr>Address</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_wallet_substratewallet_.substratewallet.html#getl1balance" class="tsd-kind-icon">get<wbr>L1Balance</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_wallet_substratewallet_.substratewallet.html#signmessage" class="tsd-kind-icon">sign<wbr>Message</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_wallet_substratewallet_.substratewallet.html#verifymysignature" class="tsd-kind-icon">verify<wbr>MySignature</a>
+								<a href="_contract_ownershippayoutcontract_.ownershippayoutcontract.html#finalizeexit" class="tsd-kind-icon">finalize<wbr>Exit</a>
 							</li>
 						</ul>
 					</li>

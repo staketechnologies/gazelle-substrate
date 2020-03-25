@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EventWatcher | wakkanay-substrate</title>
+	<title>ERC20Contract | wakkanay-substrate</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_events_substrateeventwatcher_.html">&quot;events/SubstrateEventWatcher&quot;</a>
+					<a href="../modules/_contract_erc20contract_.html">&quot;contract/ERC20Contract&quot;</a>
 				</li>
 				<li>
-					<a href="_events_substrateeventwatcher_.eventwatcher.html">EventWatcher</a>
+					<a href="_contract_erc20contract_.erc20contract.html">ERC20Contract</a>
 				</li>
 			</ul>
-			<h1>Class EventWatcher</h1>
+			<h1>Class ERC20Contract</h1>
 		</div>
 	</div>
 </header>
@@ -71,14 +71,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">EventWatcher</span>
+						<span class="target">ERC20Contract</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><span class="tsd-signature-type">IEventWatcher</span></li>
+					<li><span class="tsd-signature-type">IERC20Contract</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -88,25 +88,24 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_events_substrateeventwatcher_.eventwatcher.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_contract_erc20contract_.erc20contract.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_events_substrateeventwatcher_.eventwatcher.html#api" class="tsd-kind-icon">api</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_events_substrateeventwatcher_.eventwatcher.html#checkingevents" class="tsd-kind-icon">checking<wbr>Events</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_events_substrateeventwatcher_.eventwatcher.html#contractaddress" class="tsd-kind-icon">contract<wbr>Address</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_events_substrateeventwatcher_.eventwatcher.html#eventdb" class="tsd-kind-icon">event<wbr>Db</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_events_substrateeventwatcher_.eventwatcher.html#timer" class="tsd-kind-icon">timer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_contract_erc20contract_.erc20contract.html#address" class="tsd-kind-icon">address</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_contract_erc20contract_.erc20contract.html#api" class="tsd-kind-icon">api</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_contract_erc20contract_.erc20contract.html#contractid" class="tsd-kind-icon">contract<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_contract_erc20contract_.erc20contract.html#eventwatcher" class="tsd-kind-icon">event<wbr>Watcher</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_contract_erc20contract_.erc20contract.html#operatorkeypair" class="tsd-kind-icon">operator<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_contract_erc20contract_.erc20contract.html#registry" class="tsd-kind-icon">registry</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_events_substrateeventwatcher_.eventwatcher.html#start" class="tsd-kind-icon">start</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_events_substrateeventwatcher_.eventwatcher.html#subscribe" class="tsd-kind-icon">subscribe</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_events_substrateeventwatcher_.eventwatcher.html#unsubscribe" class="tsd-kind-icon">unsubscribe</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_contract_erc20contract_.erc20contract.html#approve" class="tsd-kind-icon">approve</a></li>
 							</ul>
 						</section>
 					</div>
@@ -118,33 +117,31 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Event<wbr>Watcher<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>api<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ApiPromise</span><span class="tsd-signature-symbol">; </span>contractAddress<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>kvs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyValueStore</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_events_substrateeventwatcher_.eventwatcher.html" class="tsd-signature-type">EventWatcher</a></li>
+						<li class="tsd-signature tsd-kind-icon">new ERC20<wbr>Contract<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span>, eventDb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyValueStore</span>, api<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ApiPromise</span>, operatorKeyPair<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyringPair</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_contract_erc20contract_.erc20contract.html" class="tsd-signature-type">ERC20Contract</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/events/SubstrateEventWatcher.ts#L22">events/SubstrateEventWatcher.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/ERC20Contract.ts#L13">contract/ERC20Contract.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>__namedParameters: <span class="tsd-signature-symbol">{ </span>api<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ApiPromise</span><span class="tsd-signature-symbol">; </span>contractAddress<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>kvs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyValueStore</span><span class="tsd-signature-symbol"> }</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter">
-											<h5>api<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ApiPromise</span></h5>
-										</li>
-										<li class="tsd-parameter">
-											<h5>contract<wbr>Address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-										</li>
-										<li class="tsd-parameter">
-											<h5>kvs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyValueStore</span></h5>
-										</li>
-									</ul>
+									<h5>address: <span class="tsd-signature-type">Address</span></h5>
+								</li>
+								<li>
+									<h5>eventDb: <span class="tsd-signature-type">KeyValueStore</span></h5>
+								</li>
+								<li>
+									<h5>api: <span class="tsd-signature-type">ApiPromise</span></h5>
+								</li>
+								<li>
+									<h5>operatorKeyPair: <span class="tsd-signature-type">KeyringPair</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_events_substrateeventwatcher_.eventwatcher.html" class="tsd-signature-type">EventWatcher</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_contract_erc20contract_.erc20contract.html" class="tsd-signature-type">ERC20Contract</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -152,52 +149,62 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="address" class="tsd-anchor"></a>
+					<h3>address</h3>
+					<div class="tsd-signature tsd-kind-icon">address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Address</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/ERC20Contract.ts#L16">contract/ERC20Contract.ts:16</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="api" class="tsd-anchor"></a>
 					<h3>api</h3>
 					<div class="tsd-signature tsd-kind-icon">api<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ApiPromise</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/events/SubstrateEventWatcher.ts#L18">events/SubstrateEventWatcher.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/ERC20Contract.ts#L18">contract/ERC20Contract.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="checkingevents" class="tsd-anchor"></a>
-					<h3>checking<wbr>Events</h3>
-					<div class="tsd-signature tsd-kind-icon">checking<wbr>Events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">EventHandler</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="contractid" class="tsd-anchor"></a>
+					<h3>contract<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">contract<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AccountId</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/events/SubstrateEventWatcher.ts#L20">events/SubstrateEventWatcher.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/ERC20Contract.ts#L12">contract/ERC20Contract.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="contractaddress" class="tsd-anchor"></a>
-					<h3>contract<wbr>Address</h3>
-					<div class="tsd-signature tsd-kind-icon">contract<wbr>Address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="eventwatcher" class="tsd-anchor"></a>
+					<h3>event<wbr>Watcher</h3>
+					<div class="tsd-signature tsd-kind-icon">event<wbr>Watcher<span class="tsd-signature-symbol">:</span> <a href="_events_substrateeventwatcher_.eventwatcher.html" class="tsd-signature-type">EventWatcher</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/events/SubstrateEventWatcher.ts#L22">events/SubstrateEventWatcher.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/ERC20Contract.ts#L13">contract/ERC20Contract.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="eventdb" class="tsd-anchor"></a>
-					<h3>event<wbr>Db</h3>
-					<div class="tsd-signature tsd-kind-icon">event<wbr>Db<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventDb</span></div>
+					<a name="operatorkeypair" class="tsd-anchor"></a>
+					<h3>operator<wbr>Key<wbr>Pair</h3>
+					<div class="tsd-signature tsd-kind-icon">operator<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">KeyringPair</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/events/SubstrateEventWatcher.ts#L19">events/SubstrateEventWatcher.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/ERC20Contract.ts#L19">contract/ERC20Contract.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="timer" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> timer</h3>
-					<div class="tsd-signature tsd-kind-icon">timer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<a name="registry" class="tsd-anchor"></a>
+					<h3>registry</h3>
+					<div class="tsd-signature tsd-kind-icon">registry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TypeRegistry</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/events/SubstrateEventWatcher.ts#L21">events/SubstrateEventWatcher.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/ERC20Contract.ts#L11">contract/ERC20Contract.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -205,109 +212,28 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="start" class="tsd-anchor"></a>
-					<h3>start</h3>
+					<a name="approve" class="tsd-anchor"></a>
+					<h3>approve</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span>handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CompletedHandler</span>, errorHandler<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ErrorHandler</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">approve<span class="tsd-signature-symbol">(</span>spender<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span>, amount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Integer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/events/SubstrateEventWatcher.ts#L54">events/SubstrateEventWatcher.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/contract/ERC20Contract.ts#L30">contract/ERC20Contract.ts:30</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Start subscribing</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>handler: <span class="tsd-signature-type">CompletedHandler</span></h5>
+									<h5>spender: <span class="tsd-signature-type">Address</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> errorHandler: <span class="tsd-signature-type">ErrorHandler</span></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
+									<h5>amount: <span class="tsd-signature-type">Integer</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="subscribe" class="tsd-anchor"></a>
-					<h3>subscribe</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventHandler</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/events/SubstrateEventWatcher.ts#L36">events/SubstrateEventWatcher.ts:36</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Add new handler for an event</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>event name</p>
-									</div>
-								</li>
-								<li>
-									<h5>handler: <span class="tsd-signature-type">EventHandler</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>handler function</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="unsubscribe" class="tsd-anchor"></a>
-					<h3>unsubscribe</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">unsubscribe<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventHandler</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/cryptoeconomicslab/wakkanay-substrate/blob/8a7f356/src/events/SubstrateEventWatcher.ts#L45">events/SubstrateEventWatcher.ts:45</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Remove handler for an event</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>event name</p>
-									</div>
-								</li>
-								<li>
-									<h5>handler: <span class="tsd-signature-type">EventHandler</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>handler function</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -334,7 +260,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_contract_depositcontract_.html">&quot;contract/<wbr>Deposit<wbr>Contract&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_contract_erc20contract_.html">&quot;contract/ERC20<wbr>Contract&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -343,7 +269,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_contract_index_.html">&quot;contract/index&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_events_substrateeventwatcher_.html">&quot;events/<wbr>Substrate<wbr>Event<wbr>Watcher&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -359,42 +285,36 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_events_substrateeventwatcher_.eventwatcher.html" class="tsd-kind-icon">Event<wbr>Watcher</a>
+						<a href="_contract_erc20contract_.erc20contract.html" class="tsd-kind-icon">ERC20<wbr>Contract</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_events_substrateeventwatcher_.eventwatcher.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_contract_erc20contract_.erc20contract.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_events_substrateeventwatcher_.eventwatcher.html#api" class="tsd-kind-icon">api</a>
+								<a href="_contract_erc20contract_.erc20contract.html#address" class="tsd-kind-icon">address</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_events_substrateeventwatcher_.eventwatcher.html#checkingevents" class="tsd-kind-icon">checking<wbr>Events</a>
+								<a href="_contract_erc20contract_.erc20contract.html#api" class="tsd-kind-icon">api</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_events_substrateeventwatcher_.eventwatcher.html#contractaddress" class="tsd-kind-icon">contract<wbr>Address</a>
+								<a href="_contract_erc20contract_.erc20contract.html#contractid" class="tsd-kind-icon">contract<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_events_substrateeventwatcher_.eventwatcher.html#eventdb" class="tsd-kind-icon">event<wbr>Db</a>
+								<a href="_contract_erc20contract_.erc20contract.html#eventwatcher" class="tsd-kind-icon">event<wbr>Watcher</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_events_substrateeventwatcher_.eventwatcher.html#timer" class="tsd-kind-icon">timer</a>
+								<a href="_contract_erc20contract_.erc20contract.html#operatorkeypair" class="tsd-kind-icon">operator<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_contract_erc20contract_.erc20contract.html#registry" class="tsd-kind-icon">registry</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_events_substrateeventwatcher_.eventwatcher.html#start" class="tsd-kind-icon">start</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_events_substrateeventwatcher_.eventwatcher.html#subscribe" class="tsd-kind-icon">subscribe</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_events_substrateeventwatcher_.eventwatcher.html#unsubscribe" class="tsd-kind-icon">unsubscribe</a>
+								<a href="_contract_erc20contract_.erc20contract.html#approve" class="tsd-kind-icon">approve</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_events_substrateeventwatcher_.html#substrateeventwatcherargtype" class="tsd-kind-icon">Substrate<wbr>Event<wbr>Watcher<wbr>Arg<wbr>Type</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
