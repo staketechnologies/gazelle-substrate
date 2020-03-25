@@ -1,10 +1,15 @@
 import { ApiPromise } from '@polkadot/api'
 import { KeyringPair } from '@polkadot/keyring/types'
 import AccountId from '@polkadot/types/primitive/Generic/AccountId'
-import { TypeRegistry, U256, H256 } from '@polkadot/types'
+import { TypeRegistry } from '@polkadot/types'
 import { Codec } from '@polkadot/types/types'
 import { ICommitmentContract, EventLog } from '@cryptoeconomicslab/contract'
-import { Address, BigNumber, Bytes } from '@cryptoeconomicslab/primitives'
+import {
+  Address,
+  BigNumber,
+  Bytes,
+  Codable
+} from '@cryptoeconomicslab/primitives'
 import { KeyValueStore } from '@cryptoeconomicslab/db'
 import EventWatcher from '../events/SubstrateEventWatcher'
 import {
@@ -42,8 +47,8 @@ export class CommitmentContract implements ICommitmentContract {
     await this.api.tx.commitment
       .submitRoot(
         this.contractId,
-        encodeToPolcadotCodec(this.registry, blockNumber),
-        encodeToPolcadotCodec(this.registry, root)
+        this.encodeParam(blockNumber),
+        this.encodeParam(root)
       )
       .signAndSend(this.operatorKeyPair, {})
   }
@@ -65,7 +70,7 @@ export class CommitmentContract implements ICommitmentContract {
   async getRoot(blockNumber: BigNumber): Promise<Bytes> {
     const root = await this.api.query.commitment.getRoot(
       this.contractId,
-      encodeToPolcadotCodec(this.registry, blockNumber)
+      this.encodeParam(blockNumber)
     )
     return Bytes.fromHexString(root.toHex())
   }
@@ -81,13 +86,17 @@ export class CommitmentContract implements ICommitmentContract {
       const blockNumber: Codec = log.values[0]
       const root: Codec = log.values[1]
       handler(
-        decodeFromPolcadotCodec(
-          this.registry,
-          BigNumber.default(),
-          blockNumber
-        ) as BigNumber,
-        decodeFromPolcadotCodec(this.registry, Bytes.default(), root) as Bytes
+        this.decodeParam(BigNumber.default(), blockNumber) as BigNumber,
+        this.decodeParam(Bytes.default(), root) as Bytes
       )
     })
+  }
+
+  private encodeParam(input: Codable): Codec {
+    return encodeToPolcadotCodec(this.registry, input)
+  }
+
+  private decodeParam(def: Codable, input: Codec): Codable {
+    return decodeFromPolcadotCodec(this.registry, def, input)
   }
 }
