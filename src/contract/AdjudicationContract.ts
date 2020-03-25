@@ -20,6 +20,10 @@ import {
   encodeToPolcadotCodec
 } from '../coder/PolcadotCoder'
 
+/**
+ * @name AdjudicationContract
+ * @description Adjudication Contract is the contract to archive dispute game defined by predicate logic.
+ */
 export class AdjudicationContract implements IAdjudicationContract {
   registry: TypeRegistry
   contractId: AccountId

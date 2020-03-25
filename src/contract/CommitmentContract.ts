@@ -17,6 +17,12 @@ import {
   decodeFromPolcadotCodec
 } from '../coder/PolcadotCoder'
 
+/**
+ * @name CommitmentContract
+ * @description This is the wrapper to access Commitment Contract.
+ *     Each plasma chain has one commitment contract.
+ *     Commitment contracts hold Merkle roots for the Plasma.
+ */
 export class CommitmentContract implements ICommitmentContract {
   private registry: TypeRegistry
   private contractId: AccountId
