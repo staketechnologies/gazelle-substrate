@@ -9,13 +9,16 @@ import {
   Bytes,
   BigNumber,
   List,
-  Tuple,
-  Struct
+  Struct,
+  Codable
 } from '@cryptoeconomicslab/primitives'
 import { KeyValueStore } from '@cryptoeconomicslab/db'
 import EventWatcher from '../events/SubstrateEventWatcher'
 import { Property, ChallengeGame } from '@cryptoeconomicslab/ovm'
-import PolcadotCoder, { decodeInner, innerEncode } from '../coder/PolcadotCoder'
+import {
+  decodeFromPolcadotCodec,
+  encodeToPolcadotCodec
+} from '../coder/PolcadotCoder'
 
 export class AdjudicationContract implements IAdjudicationContract {
   registry: TypeRegistry
@@ -49,7 +52,7 @@ export class AdjudicationContract implements IAdjudicationContract {
     )
     const tuple = codec as types.Tuple
     const property = Property.fromStruct(
-      decodeInner(this.registry, Property.getParamType(), tuple[0]) as Struct
+      this.decodeParam(Property.getParamType(), tuple[0]) as Struct
     )
     const vec = tuple[1] as types.Vec<types.Vec<types.u8>>
     const challenges = vec.map(c => Bytes.fromHexString(c.toHex()))
@@ -84,7 +87,7 @@ export class AdjudicationContract implements IAdjudicationContract {
    */
   async claimProperty(property: Property): Promise<void> {
     await this.api.tx.adjudication
-      .claimProperty(PolcadotCoder.encode(property.toStruct()).toHexString())
+      .claimProperty(this.encodeParam(property.toStruct()))
       .signAndSend(this.operatorKeyPair, {})
   }
 
@@ -95,7 +98,7 @@ export class AdjudicationContract implements IAdjudicationContract {
    */
   async decideClaimToTrue(gameId: Bytes): Promise<void> {
     await this.api.tx.adjudication
-      .decideClaimToTrue(gameId.toHexString())
+      .decideClaimToTrue(this.encodeParam(gameId))
       .signAndSend(this.operatorKeyPair, {})
   }
 
@@ -110,7 +113,9 @@ export class AdjudicationContract implements IAdjudicationContract {
     challengingGameId: Bytes
   ): Promise<void> {
     await this.api.tx.adjudication
-      .decideClaimToFalse(gameId.toHexString(), challengingGameId.toHexString())
+      .decideClaimToFalse(
+        ...[gameId, challengingGameId].map(i => this.encodeParam(i))
+      )
       .signAndSend(this.operatorKeyPair, {})
   }
 
@@ -125,7 +130,9 @@ export class AdjudicationContract implements IAdjudicationContract {
     challengingGameId: Bytes
   ): Promise<void> {
     await this.api.tx.adjudication
-      .removeChallenge(gameId.toHexString(), challengingGameId.toHexString())
+      .removeChallenge(
+        ...[gameId, challengingGameId].map(i => this.encodeParam(i))
+      )
       .signAndSend(this.operatorKeyPair, {})
   }
 
@@ -136,7 +143,7 @@ export class AdjudicationContract implements IAdjudicationContract {
    */
   async setPredicateDecision(gameId: Bytes, decision: boolean): Promise<void> {
     await this.api.tx.adjudication
-      .removeChallenge(gameId.toHexString(), decision)
+      .removeChallenge(this.encodeParam(gameId), decision)
       .signAndSend(this.operatorKeyPair, {})
   }
 
@@ -154,16 +161,28 @@ export class AdjudicationContract implements IAdjudicationContract {
   ): Promise<void> {
     await this.api.tx.adjudication
       .challenge(
-        gameId.toHexString(),
-        innerEncode(this.registry, challengeInputs),
-        innerEncode(this.registry, challengingGameId)
+        ...[gameId, challengeInputs, challengingGameId].map(i =>
+          this.encodeParam(i)
+        )
       )
       .signAndSend(this.operatorKeyPair, {})
   }
+
+  /**
+   * Start to subscribe AtomicPropositionDecided event
+   * @param handler
+   */
   subscribeAtomicPropositionDecided(
     handler: (gameId: Bytes, decision: boolean) => void
   ): void {
-    throw new Error('Method not implemented.')
+    this.eventWatcher.subscribe('AtomicPropositionDecided', (log: EventLog) => {
+      const gameId: Codec = log.values[0]
+      const decision = log.values[1] as types.bool
+      handler(
+        this.decodeParam(Bytes.default(), gameId) as Bytes,
+        decision.isTrue
+      )
+    })
   }
 
   /**
@@ -182,31 +201,72 @@ export class AdjudicationContract implements IAdjudicationContract {
       const encodedProperty: Codec = log.values[1]
       const createdBlock: Codec = log.values[2]
       const property = Property.fromStruct(
-        PolcadotCoder.decode(
-          Property.getParamType(),
-          Bytes.fromHexString(encodedProperty.toHex())
-        )
+        this.decodeParam(Property.getParamType(), encodedProperty) as Struct
       )
       handler(
-        Bytes.fromHexString(gameId.toHex()),
+        this.decodeParam(Bytes.default(), gameId) as Bytes,
         property,
-        BigNumber.fromHexString(createdBlock.toHex())
+        this.decodeParam(BigNumber.default(), createdBlock) as BigNumber
       )
     })
   }
+
+  /**
+   * Start to subscribe ClaimChallenged event
+   * @param handler
+   */
   subscribeClaimChallenged(
     handler: (gameId: Bytes, challengeGameId: Bytes) => void
   ): void {
-    throw new Error('Method not implemented.')
+    this.eventWatcher.subscribe('ClaimChallenged', (log: EventLog) => {
+      const gameId: Codec = log.values[0]
+      const challengeGameId: Codec = log.values[1]
+      handler(
+        this.decodeParam(Bytes.default(), gameId) as Bytes,
+        this.decodeParam(Bytes.default(), challengeGameId) as Bytes
+      )
+    })
   }
+
+  /**
+   * Start to subscribe ClaimDecided event
+   * @param handler
+   */
   subscribeClaimDecided(
     handler: (gameId: Bytes, decision: boolean) => void
   ): void {
-    throw new Error('Method not implemented.')
+    this.eventWatcher.subscribe('ClaimChallenged', (log: EventLog) => {
+      const gameId: Codec = log.values[0]
+      const decision = log.values[1] as types.bool
+      handler(
+        this.decodeParam(Bytes.default(), gameId) as Bytes,
+        decision.isTrue
+      )
+    })
   }
+
+  /**
+   * Start to subscribe ChallengeRemoved event
+   * @param handler
+   */
   subscribeChallengeRemoved(
     handler: (gameId: Bytes, challengeGameId: Bytes) => void
   ): void {
-    throw new Error('Method not implemented.')
+    this.eventWatcher.subscribe('ClaimChallenged', (log: EventLog) => {
+      const gameId: Codec = log.values[0]
+      const challengeGameId: Codec = log.values[1]
+      handler(
+        this.decodeParam(Bytes.default(), gameId) as Bytes,
+        this.decodeParam(Bytes.default(), challengeGameId) as Bytes
+      )
+    })
+  }
+
+  private encodeParam(input: Codable): Codec {
+    return encodeToPolcadotCodec(this.registry, input)
+  }
+
+  private decodeParam(def: Codable, input: Codec): Codable {
+    return decodeFromPolcadotCodec(this.registry, def, input)
   }
 }

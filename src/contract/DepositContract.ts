@@ -9,7 +9,8 @@ import {
   Bytes,
   Integer,
   Range,
-  Struct
+  Struct,
+  Codable
 } from '@cryptoeconomicslab/primitives'
 import { KeyValueStore } from '@cryptoeconomicslab/db'
 import { Checkpoint } from '@cryptoeconomicslab/plasma'
@@ -52,8 +53,8 @@ export class DepositContract implements IDepositContract {
     await this.api.tx.deposit
       .deposit(
         this.contractId,
-        amount.data,
-        encodeToPolcadotCodec(this.registry, initialState.toStruct())
+        this.encodeParam(amount),
+        this.encodeParam(initialState.toStruct())
       )
       .signAndSend(this.operatorKeyPair, {})
   }
@@ -66,7 +67,7 @@ export class DepositContract implements IDepositContract {
     await this.api.tx.deposit
       .finalizeCheckpoint(
         this.contractId,
-        encodeToPolcadotCodec(this.registry, checkpoint.toStruct())
+        this.encodeParam(checkpoint.toStruct())
       )
       .signAndSend(this.operatorKeyPair, {})
   }
@@ -80,8 +81,7 @@ export class DepositContract implements IDepositContract {
     await this.api.tx.deposit
       .finalizeCheckpoint(
         this.contractId,
-        encodeToPolcadotCodec(this.registry, exit.toStruct()),
-        depositedRangeId.data
+        [exit.toStruct(), depositedRangeId].map(i => this.encodeParam(i))
       )
       .signAndSend(this.operatorKeyPair, {})
   }
@@ -97,11 +97,7 @@ export class DepositContract implements IDepositContract {
       const checkpointId: Codec = log.values[0]
       const encodedCheckpoint: Codec = log.values[1]
       const checkpoint = Checkpoint.fromStruct(
-        decodeFromPolcadotCodec(
-          this.registry,
-          Checkpoint.getParamType(),
-          encodedCheckpoint
-        ) as Struct
+        this.decodeParam(Checkpoint.getParamType(), encodedCheckpoint) as Struct
       )
       handler(Bytes.fromHexString(checkpointId.toHex()), [
         checkpoint.subrange,
@@ -117,7 +113,7 @@ export class DepositContract implements IDepositContract {
   subscribeExitFinalized(handler: (exitId: Bytes) => void): void {
     this.eventWatcher.subscribe('ExitFinalized', (log: EventLog) => {
       const exitId: Codec = log.values[0]
-      handler(Bytes.fromHexString(exitId.toHex()))
+      handler(this.decodeParam(Bytes.default(), exitId) as Bytes)
     })
   }
 
@@ -130,11 +126,7 @@ export class DepositContract implements IDepositContract {
       const range: Codec = log.values[0]
       handler(
         Range.fromStruct(
-          decodeFromPolcadotCodec(
-            this.registry,
-            Range.getParamType(),
-            Bytes.fromHexString(range.toHex())
-          ) as Struct
+          this.decodeParam(Range.getParamType(), range) as Struct
         )
       )
     })
@@ -149,13 +141,17 @@ export class DepositContract implements IDepositContract {
       const range: Codec = log.values[0]
       handler(
         Range.fromStruct(
-          decodeFromPolcadotCodec(
-            this.registry,
-            Range.getParamType(),
-            Bytes.fromHexString(range.toHex())
-          ) as Struct
+          this.decodeParam(Range.getParamType(), range) as Struct
         )
       )
     })
+  }
+
+  private encodeParam(input: Codable): Codec {
+    return encodeToPolcadotCodec(this.registry, input)
+  }
+
+  private decodeParam(def: Codable, input: Codec): Codable {
+    return decodeFromPolcadotCodec(this.registry, def, input)
   }
 }
