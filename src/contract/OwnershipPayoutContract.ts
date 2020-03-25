@@ -21,6 +21,14 @@ export class OwnershipPayoutContract implements IOwnershipPayoutContract {
     this.contractId = new AccountId(this.registry, this.address.data)
   }
 
+  /**
+   * @name finalizeExit
+   * @description finalize exit claim with ownership StateObject
+   * @param depositContractAddress
+   * @param exitProperty
+   * @param depositedRangeId
+   * @param owner
+   */
   public async finalizeExit(
     depositContractAddress: Address,
     exitProperty: Property,

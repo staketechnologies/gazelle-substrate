@@ -22,7 +22,10 @@ import {
 } from '../coder/PolcadotCoder'
 
 /**
- * DepositContract class is the wrapper to access Deposit Contract.
+ * @name DepositContract
+ * @description DepositContract class is the wrapper to access Deposit Contract.
+ *     Deposit contracts are the smart contracts into which assets are custodying the money as it is transacted on Plasma.
+ *     It provides the API to finalize the rightful exit state of previously deposited assets.
  */
 export class DepositContract implements IDepositContract {
   private registry: TypeRegistry
