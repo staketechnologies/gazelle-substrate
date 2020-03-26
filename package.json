@@ -8,12 +8,12 @@
     "dist/**/*.d.ts"
   ],
   "scripts": {
-    "build": "tsc --build ./tsconfig.json",
-    "build:check": "tsc --noEmit",
-    "doc": "typedoc --excludeNotExported --excludePrivate --out docs src",
-    "test": "jest",
-    "lint": "eslint --ext ts,tsx src",
-    "prepare": "npm run build"
+    "build": "lerna run build",
+    "build:check": "lerna run build:check",
+    "clean": "lerna run clean",
+    "doc": "typedoc --excludeNotExported --excludePrivate --out docs packages/**/src",
+    "test": "npm run build && jest",
+    "lint": "lerna run lint"
   },
   "repository": {
     "type": "git",
@@ -25,17 +25,6 @@
     "url": "https://github.com/staketechnologies/wakkanay-substrate/issues"
   },
   "homepage": "https://github.com/staketechnologies/wakkanay-substrate#readme",
-  "dependencies": {
-    "@cryptoeconomicslab/contract": "0.0.38",
-    "@cryptoeconomicslab/db": "0.0.38",
-    "@cryptoeconomicslab/ovm": "0.0.38",
-    "@cryptoeconomicslab/plasma": "0.0.38",
-    "@cryptoeconomicslab/primitives": "0.0.38",
-    "@cryptoeconomicslab/wallet": "0.0.38",
-    "@polkadot/api": "^0.100.1",
-    "@polkadot/keyring": "^1.8.1",
-    "jsbi": "^3.1.2"
-  },
   "devDependencies": {
     "@types/jest": "^24.0.20",
     "@types/node": "^12.12.16",
@@ -45,10 +34,12 @@
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
     "jest": "^24.9.0",
+    "lerna": "^3.20.2",
     "prettier": "^1.18.2",
     "ts-jest": "^24.1.0",
     "ts-node": "^8.4.1",
     "typedoc": "^0.16.6",
+    "typedoc-plugin-nojekyll": "^1.0.1",
     "typescript": "^3.6.4"
   },
   "peerDependencies": {
@@ -70,6 +61,10 @@
       "ts-jest": {
         "tsConfig": "tsconfig.json"
       }
-    }
+    },
+    "collectCoverageFrom": [
+      "packages/**/src/**/*.ts?(x)",
+      "!**/@types/**"
+    ]
   }
 }

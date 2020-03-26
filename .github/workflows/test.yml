@@ -9,16 +9,18 @@ jobs:
       matrix:
         node-version: [10.x]
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: lint
-      run: |
-        npm install -g npm@latest
-        npm install --frozen-lockfile
-        npm run lint
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: lint
+        run: |
+          npm install -g npm@latest
+          npm install -g lerna
+          npm install --frozen-lockfile
+          lerna bootstrap
+          npm run lint
 
   test:
     name: Testing
@@ -27,16 +29,18 @@ jobs:
       matrix:
         node-version: [10.x]
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: test
-      run: |
-        npm install -g npm@latest
-        npm install --frozen-lockfile
-        npm run test
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: test
+        run: |
+          npm install -g npm@latest
+          npm install -g lerna
+          npm install --frozen-lockfile
+          lerna bootstrap
+          npm run test
 
   build_code:
     name: Build Code
@@ -45,13 +49,15 @@ jobs:
       matrix:
         node-version: [10.x]
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: build
-      run: |
-        npm install -g npm@latest
-        npm install --frozen-lockfile
-        npm run build:check
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: build
+        run: |
+          npm install -g npm@latest
+          npm install -g lerna
+          npm install --frozen-lockfile
+          lerna bootstrap
+          npm run build

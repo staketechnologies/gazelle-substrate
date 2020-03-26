@@ -5,14 +5,13 @@ L1 adaptor is the adaptor to support any blockchain for OVM client. Please also 
 
 ![](https://github.com/cryptoeconomicslab/wakkanay-substrate/workflows/Test/badge.svg)
 
-
-
 ## Development
 
 ### Install
 
 ```
 npm i
+lerna bootstrap
 ```
 
 ### How to test
