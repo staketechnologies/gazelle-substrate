@@ -1,7 +1,24 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "lib": ["es2017", "es2019", "dom"],
+    "declaration": true,
+    "sourceMap": true,
+    "importHelpers": true,
+    "removeComments": true,
+
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "outDir": "./lib"
   },
+  "exclude": ["node_modules", "**/*.test.ts"],
   "include": ["./src"]
 }
