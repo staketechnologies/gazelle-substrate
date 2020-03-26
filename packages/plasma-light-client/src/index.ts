@@ -83,5 +83,6 @@ export default async function initialize(options: SubstrateLightClientOptions) {
       Address.from(options.config.payoutContracts['DepositContract'])
     )
   )
+  await client.start()
   return client
 }
