@@ -11,6 +11,16 @@ import {
 
 describe('PolcadotCoder', () => {
   describe('encode', () => {
+    test('encode Address', () => {
+      const address = Address.from(
+        '0x2f8c6129d816cf51c374bc7f08c3e63ed156cf78aefb4a6550d97b87997977ee'
+      )
+      const encoded = PolcadotCoder.encode(address)
+      expect(encoded.toHexString()).toBe(
+        '0x2f8c6129d816cf51c374bc7f08c3e63ed156cf78aefb4a6550d97b87997977ee'
+      )
+    })
+
     test('encode BigNumber', () => {
       const encoded = PolcadotCoder.encode(BigNumber.from(100))
       expect(encoded.toHexString()).toBe('0x64000000000000000000000000000000')
@@ -96,6 +106,20 @@ describe('PolcadotCoder', () => {
   })
 
   describe('decode', () => {
+    test('decode Address', () => {
+      const decoded = PolcadotCoder.decode(
+        Address.default(),
+        Bytes.fromHexString(
+          '0x2f8c6129d816cf51c374bc7f08c3e63ed156cf78aefb4a6550d97b87997977ee'
+        )
+      )
+      expect(decoded).toEqual(
+        new Address(
+          '0x2f8c6129d816cf51c374bc7f08c3e63ed156cf78aefb4a6550d97b87997977ee'
+        )
+      )
+    })
+
     test('decode Bytes', () => {
       const decoded = PolcadotCoder.decode(
         Bytes.default(),

@@ -70,7 +70,10 @@ export function encodeToPolcadotCodec(
   input: Codable
 ): Codec {
   if (input instanceof Address) {
-    throw new Error(`Address doesn't support yet`)
+    return new types.GenericAccountId(
+      registry,
+      Bytes.fromHexString(input.data).data
+    )
   } else if (input instanceof Bytes) {
     return new types.Vec(
       registry,
@@ -117,7 +120,8 @@ export function decodeFromPolcadotCodec(
   data: any
 ): Codable {
   if (definition instanceof Address) {
-    throw new Error(`Address doesn't support yet`)
+    const accountId = data as types.GenericAccountId
+    return new Address(accountId.toHex())
   } else if (definition instanceof Bytes) {
     const arr = data as types.Vec<types.u8>
     return Bytes.from(
@@ -167,7 +171,7 @@ export function decodeFromPolcadotCodec(
 
 function innerDecode(registry: TypeRegistry, definition: Codable, data: Bytes) {
   if (definition instanceof Address) {
-    throw new Error(`Address doesn't support yet`)
+    return types.GenericAccountId.from(data.data)
   } else if (definition instanceof Bytes) {
     return types.Vec.decodeVec(registry, types.u8, data.data)
   } else if (definition instanceof Integer || definition instanceof BigNumber) {
