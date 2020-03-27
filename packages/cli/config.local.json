@@ -1,0 +1,547 @@
+{
+  "logicalConnectiveAddressTable": {
+    "Not": "0x9FBDa871d559710256a2502A2517b794B482Db40",
+    "And": "0x2C2B9C9a4a25e24B174f26114e8926a9f2128FE4",
+    "ForAllSuchThat": "0x30753E4A8aad7F8597332E813735Def5dD395028",
+    "Or": "0xFB88dE099e13c3ED21F80a7a1E49f8CAEcF10df6",
+    "ThereExistsSuchThat": "0xAa588d3737B611baFD7bD713445b314BD453a5C8"
+  },
+  "atomicPredicateAddressTable": {
+    "IsValidSignature": "0xf204a4Ef082f5c04bB89F7D5E6568B796096735a",
+    "IsContained": "0x75c35C980C0d37ef46DF04d31A140b65503c0eEd",
+    "IsLessThan": "0x9d9f603bd6fbfb56d886d0fa3f652c48c1b85682",
+    "Equal": "0xe5ac0475b965b5cb869fea903cfc06dad44ec656",
+    "VerifyInclusion": "0x12c1168806d6ded5df01767cf15c677e0ff41c37",
+    "IsSameAmount": "0xcd6306dfc06ced13043655d89e5c9f6c1d588ce7",
+    "IsConcatenatedWith": "0xafce5f4a1c04365fe319101536fbf12480929445",
+    "IsValidHash": "0xbd0a0a8ecbbeb4385960245220d5995081f37ac2",
+    "IsStored": "0x4b4a581d0438340130e93e403980e43b1ec2af50"
+  },
+  "deployedPredicateTable": {
+    "StateUpdatePredicate": {
+      "deployedAddress": "0xdDA6327139485221633A1FcD65f4aC932E60A2e1",
+      "source": [
+        {
+          "type": "CompiledPredicate",
+          "name": "StateUpdate",
+          "inputDefs": ["token", "range", "block_number", "so"],
+          "contracts": [
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "StateUpdate",
+              "name": "StateUpdateTA1A",
+              "connective": "And",
+              "inputDefs": [
+                "StateUpdateTA1A",
+                "tx",
+                "token",
+                "range",
+                "block_number"
+              ],
+              "inputs": [
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "Equal"
+                  },
+                  "inputs": [
+                    {
+                      "type": "NormalInput",
+                      "inputIndex": 1,
+                      "children": [-1]
+                    },
+                    { "type": "ConstantInput", "name": "txAddress" }
+                  ]
+                },
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "Equal"
+                  },
+                  "inputs": [
+                    { "type": "NormalInput", "inputIndex": 1, "children": [0] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [] }
+                  ]
+                },
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "IsContained"
+                  },
+                  "inputs": [
+                    { "type": "NormalInput", "inputIndex": 3, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [1] }
+                  ]
+                },
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "IsLessThan"
+                  },
+                  "inputs": [
+                    { "type": "NormalInput", "inputIndex": 4, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [2] }
+                  ]
+                }
+              ],
+              "propertyInputs": [
+                { "type": "NormalInput", "inputIndex": 1, "children": [] }
+              ]
+            },
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "StateUpdate",
+              "name": "StateUpdateTA",
+              "connective": "And",
+              "inputDefs": [
+                "StateUpdateTA",
+                "tx",
+                "token",
+                "range",
+                "block_number",
+                "so"
+              ],
+              "inputs": [
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "StateUpdateTA1A"
+                  },
+                  "inputs": [
+                    { "type": "LabelInput", "label": "StateUpdateTA1A" },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 3, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 4, "children": [] }
+                  ],
+                  "isCompiled": true
+                },
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "InputPredicateCall",
+                    "source": {
+                      "type": "NormalInput",
+                      "inputIndex": 5,
+                      "children": []
+                    }
+                  },
+                  "inputs": [
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] }
+                  ]
+                }
+              ],
+              "propertyInputs": []
+            },
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "StateUpdate",
+              "name": "StateUpdateT",
+              "connective": "ThereExistsSuchThat",
+              "inputDefs": [
+                "StateUpdateT",
+                "token",
+                "range",
+                "block_number",
+                "so"
+              ],
+              "inputs": [
+                "tx.block${block_number}.range${token},RANGE,${range}",
+                "tx",
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "StateUpdateTA"
+                  },
+                  "inputs": [
+                    { "type": "LabelInput", "label": "StateUpdateTA" },
+                    {
+                      "type": "VariableInput",
+                      "placeholder": "tx",
+                      "children": []
+                    },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 3, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 4, "children": [] }
+                  ],
+                  "isCompiled": true
+                }
+              ],
+              "propertyInputs": []
+            }
+          ],
+          "entryPoint": "StateUpdateT",
+          "constants": [{ "varType": "bytes", "name": "txAddress" }]
+        }
+      ]
+    },
+    "OwnershipPredicate": {
+      "deployedAddress": "0x0d8cc4b8d15D4c3eF1d70af0071376fb26B5669b",
+      "source": [
+        {
+          "type": "CompiledPredicate",
+          "name": "Ownership",
+          "inputDefs": ["owner", "tx"],
+          "contracts": [
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "Ownership",
+              "name": "OwnershipT",
+              "connective": "ThereExistsSuchThat",
+              "inputDefs": ["OwnershipT", "owner", "tx"],
+              "inputs": [
+                "signatures,KEY,${tx}",
+                "v0",
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "IsValidSignature"
+                  },
+                  "inputs": [
+                    { "type": "NormalInput", "inputIndex": 2, "children": [] },
+                    {
+                      "type": "VariableInput",
+                      "placeholder": "v0",
+                      "children": []
+                    },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] },
+                    { "type": "ConstantInput", "name": "secp256k1" }
+                  ]
+                }
+              ],
+              "propertyInputs": []
+            }
+          ],
+          "entryPoint": "OwnershipT",
+          "constants": [{ "varType": "bytes", "name": "secp256k1" }]
+        }
+      ]
+    },
+    "CheckpointPredicate": {
+      "deployedAddress": "0x38cF23C52Bb4B13F051Aec09580a2dE845a7FA35",
+      "source": [
+        {
+          "type": "CompiledPredicate",
+          "name": "Checkpoint",
+          "inputDefs": ["su"],
+          "contracts": [
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "Checkpoint",
+              "name": "CheckpointFO1N",
+              "connective": "Not",
+              "inputDefs": ["CheckpointFO1N", "b", "su"],
+              "inputs": [
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "IsLessThan"
+                  },
+                  "inputs": [
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [2] }
+                  ]
+                }
+              ],
+              "propertyInputs": [
+                { "type": "NormalInput", "inputIndex": 2, "children": [] }
+              ]
+            },
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "Checkpoint",
+              "name": "CheckpointFO2FO1N1T",
+              "connective": "ThereExistsSuchThat",
+              "inputDefs": ["CheckpointFO2FO1N1T", "old_su", "su", "b"],
+              "inputs": [
+                "proof.block${b}.range${token},RANGE,${range}",
+                "v0",
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "VerifyInclusion"
+                  },
+                  "inputs": [
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [0] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [1] },
+                    {
+                      "type": "VariableInput",
+                      "placeholder": "v0",
+                      "children": []
+                    },
+                    { "type": "NormalInput", "inputIndex": 3, "children": [] }
+                  ]
+                }
+              ],
+              "propertyInputs": [
+                { "type": "NormalInput", "inputIndex": 2, "children": [] }
+              ]
+            },
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "Checkpoint",
+              "name": "CheckpointFO2FO1N",
+              "connective": "Not",
+              "inputDefs": ["CheckpointFO2FO1N", "old_su", "su", "b"],
+              "inputs": [
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "CheckpointFO2FO1N1T"
+                  },
+                  "inputs": [
+                    { "type": "LabelInput", "label": "CheckpointFO2FO1N1T" },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 3, "children": [] }
+                  ],
+                  "isCompiled": true
+                }
+              ],
+              "propertyInputs": []
+            },
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "Checkpoint",
+              "name": "CheckpointFO2FO",
+              "connective": "Or",
+              "inputDefs": ["CheckpointFO2FO", "old_su", "su", "b"],
+              "inputs": [
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "CheckpointFO2FO1N"
+                  },
+                  "inputs": [
+                    { "type": "LabelInput", "label": "CheckpointFO2FO1N" },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 3, "children": [] }
+                  ],
+                  "isCompiled": true
+                },
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "InputPredicateCall",
+                    "source": {
+                      "type": "NormalInput",
+                      "inputIndex": 1,
+                      "children": []
+                    }
+                  },
+                  "inputs": []
+                }
+              ],
+              "propertyInputs": []
+            },
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "Checkpoint",
+              "name": "CheckpointFO2F",
+              "connective": "ForAllSuchThat",
+              "inputDefs": ["CheckpointFO2F", "su", "b"],
+              "inputs": [
+                "so.block${b}.range${su.0},RANGE,${su.1}",
+                "old_su",
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "CheckpointFO2FO"
+                  },
+                  "inputs": [
+                    { "type": "LabelInput", "label": "CheckpointFO2FO" },
+                    {
+                      "type": "VariableInput",
+                      "placeholder": "old_su",
+                      "children": []
+                    },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [] }
+                  ],
+                  "isCompiled": true
+                }
+              ],
+              "propertyInputs": []
+            },
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "Checkpoint",
+              "name": "CheckpointFO",
+              "connective": "Or",
+              "inputDefs": ["CheckpointFO", "b", "su"],
+              "inputs": [
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "CheckpointFO1N"
+                  },
+                  "inputs": [
+                    { "type": "LabelInput", "label": "CheckpointFO1N" },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [] }
+                  ],
+                  "isCompiled": true
+                },
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "CheckpointFO2F"
+                  },
+                  "inputs": [
+                    { "type": "LabelInput", "label": "CheckpointFO2F" },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] }
+                  ],
+                  "isCompiled": true
+                }
+              ],
+              "propertyInputs": []
+            },
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "Checkpoint",
+              "name": "CheckpointF",
+              "connective": "ForAllSuchThat",
+              "inputDefs": ["CheckpointF", "su"],
+              "inputs": [
+                "range,NUMBER,0x0000000000000000000000000000000000000000000000000000000000000000-${su.2}",
+                "b",
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "CheckpointFO"
+                  },
+                  "inputs": [
+                    { "type": "LabelInput", "label": "CheckpointFO" },
+                    {
+                      "type": "VariableInput",
+                      "placeholder": "b",
+                      "children": []
+                    },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] }
+                  ],
+                  "isCompiled": true
+                }
+              ],
+              "propertyInputs": []
+            }
+          ],
+          "entryPoint": "CheckpointF"
+        }
+      ]
+    },
+    "ExitPredicate": {
+      "deployedAddress": "0xbaAA2a3237035A2c7fA2A33c76B44a8C6Fe18e87",
+      "source": [
+        {
+          "type": "CompiledPredicate",
+          "name": "Exit",
+          "inputDefs": ["su", "proof"],
+          "contracts": [
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "Exit",
+              "name": "ExitA2N",
+              "connective": "Not",
+              "inputDefs": ["ExitA2N", "su"],
+              "inputs": [
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "InputPredicateCall",
+                    "source": {
+                      "type": "NormalInput",
+                      "inputIndex": 1,
+                      "children": []
+                    }
+                  },
+                  "inputs": []
+                }
+              ],
+              "propertyInputs": []
+            },
+            {
+              "type": "IntermediateCompiledPredicate",
+              "originalPredicateName": "Exit",
+              "name": "ExitA",
+              "connective": "And",
+              "inputDefs": ["ExitA", "su", "proof"],
+              "inputs": [
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "VerifyInclusion"
+                  },
+                  "inputs": [
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [0] },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [1] },
+                    { "type": "NormalInput", "inputIndex": 2, "children": [] },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [2] }
+                  ]
+                },
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "ExitA2N"
+                  },
+                  "inputs": [
+                    { "type": "LabelInput", "label": "ExitA2N" },
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] }
+                  ],
+                  "isCompiled": true
+                },
+                {
+                  "type": "AtomicProposition",
+                  "predicate": {
+                    "type": "AtomicPredicateCall",
+                    "source": "Checkpoint"
+                  },
+                  "inputs": [
+                    { "type": "NormalInput", "inputIndex": 1, "children": [] }
+                  ]
+                }
+              ],
+              "propertyInputs": [
+                { "type": "NormalInput", "inputIndex": 1, "children": [] }
+              ]
+            }
+          ],
+          "entryPoint": "ExitA",
+          "constants": [{ "varType": "address", "name": "Checkpoint" }]
+        }
+      ]
+    }
+  },
+  "constantVariableTable": {
+    "secp256k1": "0x736563703235366b31",
+    "txAddress": "0x0000000000000000000000000000000000000000"
+  },
+  "commitmentContract": "0x8CdaF0CD259887258Bc13a92C0a6dA92698644C0",
+  "adjudicationContract": "0x8f0483125FCb9aaAEFA9209D8E9d7b9C8B9Fb90F",
+  "payoutContracts": {
+    "DepositContract": "0xB529f14AA8096f943177c09Ca294Ad66d2E08b1f",
+    "OwnershipPayout": "0x82D50AD3C1091866E258Fd0f1a7cC9674609D254"
+  },
+  "PlasmaETH": "0xA4392264a2d8c998901D10C154C91725b1BF0158"
+}
