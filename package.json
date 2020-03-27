@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "OVM L1 adapter for Substrate",
   "main": "dist/index.js",
+  "engines": {
+    "node": "10.x"
+  },
   "files": [
     "dist/**/*.js",
     "dist/**/*.d.ts"
