@@ -29,12 +29,14 @@
     "clean": "rm -rf lib docs"
   },
   "dependencies": {
+    "@cryptoeconomicslab/level-kvs": "^0.0.6",
     "@cryptoeconomicslab/primitives": "0.0.38",
     "@cryptoeconomicslab/substrate-plasma-light-client": "^0.0.1",
     "@polkadot/api": "^0.100.1",
     "@polkadot/keyring": "^1.8.1",
     "cac": "^6.5.8",
-    "jsbi": "^3.1.2"
+    "jsbi": "^3.1.2",
+    "leveldown": "^5.5.1"
   },
   "devDependencies": {
     "@cryptoeconomicslab/primitives": "0.0.38"
