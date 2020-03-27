@@ -11,6 +11,10 @@ L1 adaptor is the adaptor to support any blockchain for OVM client. Please also 
 
 L1 Adaptor implementation.
 
+### [@cryptoeconomicslab/substrate-cli](/packages/cli)
+
+CLI Plasma Light Client.
+
 ### [@cryptoeconomicslab/substrate-plasma-light-client](/packages/plasma-light-client)
 
 Initializer of Plasma Light Client.
@@ -38,7 +42,6 @@ npm test
 
 - [Document root of framework](https://github.com/cryptoeconomicslab/ovm-plasma-chamber-spec)
 - [API Reference of Substrate L1 Adaptor](https://cryptoeconomicslab.github.io/wakkanay-substrate/)
-
 
 ### Contributing
 
