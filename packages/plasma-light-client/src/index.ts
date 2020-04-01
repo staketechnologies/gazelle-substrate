@@ -1,6 +1,5 @@
 import Keyring from '@polkadot/keyring'
 import { ApiPromise } from '@polkadot/api'
-import { stringToU8a } from '@polkadot/util'
 import {
   PolcadotCoder,
   SubstrateWallet,
@@ -22,6 +21,7 @@ setupContext({
 })
 
 export interface SubstrateLightClientOptions {
+  keyring: Keyring
   kvs: KeyValueStore
   config: DeciderConfig & SubstarteContractConfig
   aggregatorEndpoint?: string
@@ -29,9 +29,7 @@ export interface SubstrateLightClientOptions {
 
 export default async function initialize(options: SubstrateLightClientOptions) {
   const eventDb = await options.kvs.bucket(Bytes.fromString('event'))
-  const seed = stringToU8a('12345678901234567890123456789012')
-  const keyring = new Keyring({ ss58Format: 42, type: 'ed25519' })
-  keyring.addFromSeed(seed, {})
+  const keyring = options.keyring
   const apiPromise = new ApiPromise()
   const substrateWallet = new SubstrateWallet(keyring)
   const adjudicationContract = new AdjudicationContract(

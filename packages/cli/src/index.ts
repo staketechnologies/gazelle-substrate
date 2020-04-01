@@ -1,16 +1,29 @@
+import Keyring from '@polkadot/keyring'
+import { stringToU8a } from '@polkadot/util'
 import initialize from '@cryptoeconomicslab/substrate-plasma-light-client'
 import { Bytes } from '@cryptoeconomicslab/primitives'
 import leveldown from 'leveldown'
 import { LevelKeyValueStore } from '@cryptoeconomicslab/level-kvs'
-import * as config from '../config.local.json'
+import * as deciderConfig from './config.local.json'
+import { config } from 'dotenv'
+config()
 
 import Cli from 'cac'
 const cli = Cli()
 
-const tokenAddress = config.PlasmaETH
+const tokenAddress = deciderConfig.PlasmaETH
+
+function getKeyring() {
+  const seed = stringToU8a(process.env.KEYRING_SEED)
+  const keyring = new Keyring({ ss58Format: 42, type: 'ed25519' })
+  keyring.addFromSeed(seed, {})
+  return keyring
+}
+
 async function instantiate() {
+  const keyring = getKeyring()
   const kvs = new LevelKeyValueStore(Bytes.fromString('cli'), leveldown('.db'))
-  return initialize({ kvs, config: config as any })
+  return initialize({ keyring, kvs, config: deciderConfig as any })
 }
 
 cli.command('deposit <amount>', 'Deposit').action(async (amount, options) => {

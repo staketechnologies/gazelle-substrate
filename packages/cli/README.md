@@ -1,13 +1,5 @@
 # substrate-plasma-aggregator
 
-## Run aggregator
-
-### Use Docker
-
-```
-docker-compose up
-```
-
 ## Development
 
 ### Copy .env
@@ -16,8 +8,8 @@ docker-compose up
 cp .sample.env .env
 ```
 
-### Test Run
+### Get balance
 
 ```
-npm start
+npm start -- balance
 ```
