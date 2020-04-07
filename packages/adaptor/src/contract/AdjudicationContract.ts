@@ -45,6 +45,18 @@ export class AdjudicationContract implements IAdjudicationContract {
   }
 
   /**
+   * @name isDecidable
+   * @description Check dispute period of the game has already passed.
+   * @param gameId
+   */
+  async isDecidable(gameId: Bytes): Promise<boolean> {
+    const codec = await this.api.query.adjudication.isDecidable(
+      this.encodeParam(gameId)
+    )
+    return (codec as types.bool).isTrue
+  }
+
+  /**
    * @name getGame
    * @description Gets instantiated challenge game by gameId.
    *     Throw exception if game is not found.
@@ -52,7 +64,7 @@ export class AdjudicationContract implements IAdjudicationContract {
    */
   async getGame(gameId: Bytes): Promise<ChallengeGame> {
     const codec = await this.api.query.adjudication.getGame(
-      gameId.toHexString()
+      this.encodeParam(gameId)
     )
     const tuple = codec as types.Tuple
     const property = Property.fromStruct(

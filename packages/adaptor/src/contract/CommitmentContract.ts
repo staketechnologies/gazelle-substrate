@@ -8,7 +8,8 @@ import {
   Address,
   BigNumber,
   Bytes,
-  Codable
+  Codable,
+  FixedBytes
 } from '@cryptoeconomicslab/primitives'
 import { KeyValueStore } from '@cryptoeconomicslab/db'
 import EventWatcher from '../events/SubstrateEventWatcher'
@@ -49,7 +50,7 @@ export class CommitmentContract implements ICommitmentContract {
    * @param blockNumber The block number where to submit Merkle root hash
    * @param root Merkle root Hash
    */
-  async submit(blockNumber: BigNumber, root: Bytes) {
+  async submit(blockNumber: BigNumber, root: FixedBytes) {
     await this.api.tx.commitment
       .submitRoot(
         this.contractId,
@@ -73,12 +74,12 @@ export class CommitmentContract implements ICommitmentContract {
    * Get Merkle root hash by Plasma block number
    * @param blockNumber Plasma block number
    */
-  async getRoot(blockNumber: BigNumber): Promise<Bytes> {
+  async getRoot(blockNumber: BigNumber): Promise<FixedBytes> {
     const root = await this.api.query.commitment.getRoot(
       this.contractId,
       this.encodeParam(blockNumber)
     )
-    return Bytes.fromHexString(root.toHex())
+    return FixedBytes.fromHexString(32, root.toHex())
   }
 
   /**
@@ -86,14 +87,14 @@ export class CommitmentContract implements ICommitmentContract {
    * @param handler
    */
   subscribeBlockSubmitted(
-    handler: (blockNumber: BigNumber, root: Bytes) => void
+    handler: (blockNumber: BigNumber, root: FixedBytes) => void
   ) {
     this.eventWatcher.subscribe('BlockSubmitted', (log: EventLog) => {
       const blockNumber: Codec = log.values[0]
       const root: Codec = log.values[1]
       handler(
         this.decodeParam(BigNumber.default(), blockNumber) as BigNumber,
-        this.decodeParam(Bytes.default(), root) as Bytes
+        this.decodeParam(FixedBytes.default(32), root) as FixedBytes
       )
     })
   }

@@ -30,15 +30,15 @@
     "start": "node lib/index"
   },
   "dependencies": {
-    "@cryptoeconomicslab/contract": "0.0.38",
-    "@cryptoeconomicslab/db": "0.0.38",
+    "@cryptoeconomicslab/contract": "0.3.0",
+    "@cryptoeconomicslab/db": "0.3.0",
     "@cryptoeconomicslab/level-kvs": "^0.0.6",
-    "@cryptoeconomicslab/ovm": "0.0.38",
-    "@cryptoeconomicslab/plasma": "0.0.38",
-    "@cryptoeconomicslab/plasma-aggregator": "^0.0.39",
-    "@cryptoeconomicslab/primitives": "0.0.38",
+    "@cryptoeconomicslab/ovm": "0.3.0",
+    "@cryptoeconomicslab/plasma": "0.3.0",
+    "@cryptoeconomicslab/plasma-aggregator": "^0.3.0",
+    "@cryptoeconomicslab/primitives": "0.3.0",
     "@cryptoeconomicslab/substrate-adaptor": "^0.0.1",
-    "@cryptoeconomicslab/wallet": "0.0.38",
+    "@cryptoeconomicslab/wallet": "0.3.0",
     "@polkadot/api": "^0.100.1",
     "@polkadot/keyring": "^1.8.1",
     "dotenv": "^8.2.0",
@@ -46,11 +46,11 @@
     "leveldown": "^5.5.1"
   },
   "devDependencies": {
-    "@cryptoeconomicslab/primitives": "0.0.38",
+    "@cryptoeconomicslab/primitives": "0.3.0",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.4"
   },
   "peerDependencies": {
-    "@cryptoeconomicslab/primitives": "^0.0.38"
+    "@cryptoeconomicslab/primitives": "^0.3.0"
   }
 }

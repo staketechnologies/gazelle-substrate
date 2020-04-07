@@ -94,7 +94,7 @@ export class DepositContract implements IDepositContract {
    * @param handler
    */
   subscribeCheckpointFinalized(
-    handler: (checkpointId: Bytes, checkpoint: [Range, Property]) => void
+    handler: (checkpointId: Bytes, checkpoint: [Property]) => void
   ): void {
     this.eventWatcher.subscribe('CheckpointFinalized', (log: EventLog) => {
       const checkpointId: Codec = log.values[0]
@@ -103,7 +103,6 @@ export class DepositContract implements IDepositContract {
         this.decodeParam(Checkpoint.getParamType(), encodedCheckpoint) as Struct
       )
       handler(Bytes.fromHexString(checkpointId.toHex()), [
-        checkpoint.subrange,
         checkpoint.stateUpdate
       ])
     })
