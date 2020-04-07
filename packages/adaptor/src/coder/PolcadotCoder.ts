@@ -7,7 +7,8 @@ import {
   Tuple,
   Struct,
   Integer,
-  BigNumber
+  BigNumber,
+  FixedBytes
 } from '@cryptoeconomicslab/primitives'
 import * as types from '@polkadot/types'
 import TypeRegistry = types.TypeRegistry
@@ -44,7 +45,7 @@ function getTypeString(
 ): TypeString | Constructor<types.Tuple> | Constructor<types.Vec<Codec>> {
   if (v instanceof Address) {
     return 'AccountId'
-  } else if (v instanceof Bytes) {
+  } else if (v instanceof Bytes || v instanceof FixedBytes) {
     return types.Vec.with('u8')
   } else if (v instanceof Integer || v instanceof BigNumber) {
     return 'u128'
@@ -74,7 +75,7 @@ export function encodeToPolcadotCodec(
       registry,
       Bytes.fromHexString(input.data).data
     )
-  } else if (input instanceof Bytes) {
+  } else if (input instanceof Bytes || input instanceof FixedBytes) {
     return new types.Vec(
       registry,
       'u8',
@@ -131,6 +132,16 @@ export function decodeFromPolcadotCodec(
         })
       )
     )
+  } else if (definition instanceof FixedBytes) {
+    const arr = data as types.Vec<types.u8>
+    return FixedBytes.from(
+      definition.size,
+      Uint8Array.from(
+        arr.map(c => {
+          return c.toU8a()[0]
+        })
+      )
+    )
   } else if (definition instanceof Integer) {
     return Integer.from(Number(data))
   } else if (definition instanceof BigNumber) {
@@ -173,6 +184,8 @@ function innerDecode(registry: TypeRegistry, definition: Codable, data: Bytes) {
   if (definition instanceof Address) {
     return types.GenericAccountId.from(data.data)
   } else if (definition instanceof Bytes) {
+    return types.Vec.decodeVec(registry, types.u8, data.data)
+  } else if (definition instanceof FixedBytes) {
     return types.Vec.decodeVec(registry, types.u8, data.data)
   } else if (definition instanceof Integer || definition instanceof BigNumber) {
     return types.u128.decodeAbstracInt(data.data, 256, false)

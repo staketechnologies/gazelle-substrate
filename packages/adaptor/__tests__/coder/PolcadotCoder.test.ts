@@ -2,6 +2,7 @@ import PolcadotCoder from '../../src/coder/PolcadotCoder'
 import {
   BigNumber,
   Bytes,
+  FixedBytes,
   List,
   Tuple,
   Address,
@@ -29,6 +30,13 @@ describe('PolcadotCoder', () => {
     test('encode Bytes', () => {
       const encoded = PolcadotCoder.encode(Bytes.fromHexString('0x0012345678'))
       expect(encoded.toHexString()).toBe('0x140012345678')
+    })
+
+    test('encode FixedBytes', () => {
+      const encoded = PolcadotCoder.encode(
+        FixedBytes.fromHexString(16, '0x00000000000000000000000000000102')
+      )
+      expect(encoded.toHexString()).toBe('0x4000000000000000000000000000000102')
     })
 
     test('encode List of Bytes', () => {
@@ -127,6 +135,17 @@ describe('PolcadotCoder', () => {
       )
       expect(decoded.toHexString()).toEqual('0x0012345678')
     })
+
+    test('decode FixedBytes', () => {
+      const decoded = PolcadotCoder.decode(
+        FixedBytes.default(16),
+        Bytes.fromHexString('0x4000000000000000000000000000000102')
+      )
+      expect(decoded.toHexString()).toEqual(
+        '0x00000000000000000000000000000102'
+      )
+    })
+
     test('decode Integer', () => {
       const decoded = PolcadotCoder.decode(
         Integer.default(),
