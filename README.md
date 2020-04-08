@@ -55,3 +55,5 @@ Please note we have [a code of conduct](https://github.com/cryptoeconomicslab/ov
 4.  Reference any revelant issues in your PR comment.
 
 NOTE: Be sure to merge the latest from "upstream" before making a pull request!
+
+![project supported by web3 foundation grants program](images/badge.jpg)
