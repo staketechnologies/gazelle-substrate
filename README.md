@@ -41,7 +41,7 @@ npm test
 ### Docmentation
 
 - [Document root of framework](https://github.com/cryptoeconomicslab/ovm-plasma-chamber-spec)
-- [API Reference of Substrate L1 Adaptor](https://cryptoeconomicslab.github.io/wakkanay-substrate/)
+- [API Reference of Substrate L1 Adaptor](https://cryptoeconomicslab.github.io/gazelle-substrate/)
 
 ### Contributing
 
