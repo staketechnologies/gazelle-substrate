@@ -64,4 +64,8 @@ export default class EventWatcher implements IEventWatcher {
       })
     })
   }
+
+  public async cancel() {
+    console.log('cancel is not implemented.')
+  }
 }

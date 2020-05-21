@@ -10,7 +10,8 @@ import {
   Integer,
   Range,
   Struct,
-  Codable
+  Codable,
+  BigNumber
 } from '@cryptoeconomicslab/primitives'
 import { KeyValueStore } from '@cryptoeconomicslab/db'
 import { Checkpoint } from '@cryptoeconomicslab/plasma'
@@ -52,7 +53,7 @@ export class DepositContract implements IDepositContract {
    * @param amount amount of deposit
    * @param initialState The initial StateObject to deposit
    */
-  async deposit(amount: Integer, initialState: Property): Promise<void> {
+  async deposit(amount: BigNumber, initialState: Property): Promise<void> {
     await this.api.tx.deposit
       .deposit(
         this.contractId,
@@ -147,6 +148,17 @@ export class DepositContract implements IDepositContract {
         )
       )
     })
+  }
+
+  async startWatchingEvents() {
+    this.unsubscribeAll()
+    await this.eventWatcher.start(() => {
+      /* do nothing */
+    })
+  }
+
+  unsubscribeAll() {
+    this.eventWatcher.cancel()
   }
 
   private encodeParam(input: Codable): Codec {

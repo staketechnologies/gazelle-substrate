@@ -46,7 +46,7 @@
     "typescript": "^3.6.4"
   },
   "peerDependencies": {
-    "@cryptoeconomicslab/primitives": "^0.0.35"
+    "@cryptoeconomicslab/primitives": "^0.4.0"
   },
   "jest": {
     "transform": {
