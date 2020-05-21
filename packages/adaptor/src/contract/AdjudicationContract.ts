@@ -135,6 +135,18 @@ export class AdjudicationContract implements IAdjudicationContract {
       .signAndSend(this.operatorKeyPair, {})
   }
 
+  async decideClaimWithWitness(
+    gameId: Bytes,
+    witnesses: Bytes[]
+  ): Promise<void> {
+    await this.api.tx.adjudication
+      .decideClaimToFalse(
+        this.encodeParam(gameId),
+        witnesses.map(w => this.encodeParam(w))
+      )
+      .signAndSend(this.operatorKeyPair, {})
+  }
+
   /**
    * @name removeChallenge
    * @description Removes a challenge when its decision has been evaluated to false.
@@ -276,6 +288,17 @@ export class AdjudicationContract implements IAdjudicationContract {
         this.decodeParam(Bytes.default(), challengeGameId) as Bytes
       )
     })
+  }
+
+  async startWatchingEvents() {
+    this.unsubscribeAll()
+    await this.eventWatcher.start(() => {
+      /* do nothing */
+    })
+  }
+
+  unsubscribeAll() {
+    this.eventWatcher.cancel()
   }
 
   private encodeParam(input: Codable): Codec {

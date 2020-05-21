@@ -7,7 +7,6 @@ import { ICommitmentContract, EventLog } from '@cryptoeconomicslab/contract'
 import {
   Address,
   BigNumber,
-  Bytes,
   Codable,
   FixedBytes
 } from '@cryptoeconomicslab/primitives'
@@ -97,6 +96,17 @@ export class CommitmentContract implements ICommitmentContract {
         this.decodeParam(FixedBytes.default(32), root) as FixedBytes
       )
     })
+  }
+
+  async startWatchingEvents() {
+    this.unsubscribeAll()
+    await this.eventWatcher.start(() => {
+      /* do nothing */
+    })
+  }
+
+  unsubscribeAll() {
+    this.eventWatcher.cancel()
   }
 
   private encodeParam(input: Codable): Codec {
