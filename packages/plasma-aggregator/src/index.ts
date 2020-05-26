@@ -9,7 +9,7 @@ import {
   SubstrateWallet
 } from '@cryptoeconomicslab/substrate-adaptor'
 import Keyring from '@polkadot/keyring'
-import { ApiPromise } from '@polkadot/api'
+import { ApiPromise, WsProvider } from '@polkadot/api'
 import { stringToU8a } from '@polkadot/util'
 import { setupContext } from '@cryptoeconomicslab/context'
 setupContext({
@@ -36,7 +36,10 @@ const instantiate = async (): Promise<Aggregator> => {
   )
   const keyring = new Keyring({ ss58Format: 42, type: 'ed25519' })
   keyring.addFromSeed(seed, {})
-  const apiPromise = new ApiPromise({})
+  const provider = new WsProvider(
+    process.env.PLASM_ENDPOINT || 'ws://127.0.0.1:9944'
+  )
+  const apiPromise = await ApiPromise.create({ provider })
 
   const wallet = new SubstrateWallet(keyring)
 
