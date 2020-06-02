@@ -43,7 +43,7 @@
     "ts-node": "^8.4.1",
     "typedoc": "^0.16.6",
     "typedoc-plugin-nojekyll": "^1.0.1",
-    "typescript": "^3.6.4"
+    "typescript": "^3.9.3"
   },
   "peerDependencies": {
     "@cryptoeconomicslab/primitives": "^0.4.0"
