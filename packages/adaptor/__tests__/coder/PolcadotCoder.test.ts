@@ -7,8 +7,13 @@ import {
   Tuple,
   Address,
   Struct,
-  Integer
+  Integer,
+  Range
 } from '@cryptoeconomicslab/primitives'
+import { Transaction } from '@cryptoeconomicslab/plasma'
+import { Property } from '@cryptoeconomicslab/ovm'
+import { setupContext } from '@cryptoeconomicslab/context'
+setupContext({ coder: PolcadotCoder })
 
 describe('PolcadotCoder', () => {
   describe('encode', () => {
@@ -233,6 +238,46 @@ describe('PolcadotCoder', () => {
         { key: 'num', value: BigNumber.from(100) },
         { key: 'bytes', value: Bytes.fromHexString('0x0012345678') }
       ])
+    })
+  })
+
+  describe('Transaction', () => {
+    test('encode Transaction', () => {
+      const depositContractAddress = Address.from(
+        '0x0000000000000000000000000000000000000001'
+      )
+      const range = new Range(BigNumber.from(0), BigNumber.from(10))
+      const maxBlockNumber = BigNumber.from(10)
+      const ownershipPredicateAddress = Address.from(
+        '0x0000000000000000000000000000000000000002'
+      )
+      const owner = Address.from('0x0000000000000000000000000000000000000003')
+      const ownershipState = new Property(ownershipPredicateAddress, [
+        PolcadotCoder.encode(owner)
+      ])
+      const from = Address.from('0x0000000000000000000000000000000000000004')
+      const tx = new Transaction(
+        depositContractAddress,
+        range,
+        maxBlockNumber,
+        ownershipState,
+        from
+      )
+      const transactionPredicateAddress = Address.from(
+        '0x0000000000000000000000000000000000000005'
+      )
+      // current transaction body data
+      expect(
+        PolcadotCoder.encode(
+          tx.toProperty(transactionPredicateAddress).toStruct()
+        ).toHexString()
+      ).toEqual(
+        '0x00000000000000000000000000000000000000050000000000000000000000001080000000000000000000000000000000000000000100000000000000000000000080000000000000000000000000000000000a000000000000000000000000000000400a0000000000000000000000000000000901000000000000000000000000000000000000000200000000000000000000000004800000000000000000000000000000000000000003000000000000000000000000'
+      )
+      // optimize?
+      expect(PolcadotCoder.encode(tx.body).toHexString()).toEqual(
+        '0x0000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000048000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000000000000004000000000000000000000000'
+      )
     })
   })
 })
