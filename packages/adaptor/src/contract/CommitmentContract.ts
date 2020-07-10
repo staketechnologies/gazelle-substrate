@@ -63,7 +63,7 @@ export class CommitmentContract implements ICommitmentContract {
    * Get current Plasma block number
    */
   async getCurrentBlock(): Promise<BigNumber> {
-    const blockNumber = await this.api.query.commitment.getCurrentBlock(
+    const blockNumber = await this.api.query.plasma.currentBlock(
       this.contractId
     )
     return BigNumber.fromHexString(blockNumber.toHex())
@@ -74,7 +74,7 @@ export class CommitmentContract implements ICommitmentContract {
    * @param blockNumber Plasma block number
    */
   async getRoot(blockNumber: BigNumber): Promise<FixedBytes> {
-    const root = await this.api.query.commitment.getRoot(
+    const root = await this.api.query.plasma.blocks(
       this.contractId,
       this.encodeParam(blockNumber)
     )

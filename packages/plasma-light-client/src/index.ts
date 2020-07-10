@@ -1,5 +1,5 @@
 import Keyring from '@polkadot/keyring'
-import { ApiPromise } from '@polkadot/api'
+import { ApiPromise, WsProvider } from '@polkadot/api'
 import {
   PolcadotCoder,
   SubstrateWallet,
@@ -15,6 +15,7 @@ import { KeyValueStore } from '@cryptoeconomicslab/db'
 import LightClient from '@cryptoeconomicslab/plasma-light-client'
 import { DeciderConfig } from '@cryptoeconomicslab/ovm'
 import { setupContext } from '@cryptoeconomicslab/context'
+import customTypes from './customTypes'
 
 setupContext({
   coder: PolcadotCoder
@@ -30,7 +31,13 @@ export interface SubstrateLightClientOptions {
 export default async function initialize(options: SubstrateLightClientOptions) {
   const eventDb = await options.kvs.bucket(Bytes.fromString('event'))
   const keyring = options.keyring
-  const apiPromise = new ApiPromise()
+  const provider = new WsProvider(
+    process.env.PLASM_ENDPOINT || 'ws://127.0.0.1:9944'
+  )
+  const apiPromise = await ApiPromise.create({
+    provider: provider,
+    types: customTypes
+  })
   const substrateWallet = new SubstrateWallet(keyring)
   const adjudicationContract = new AdjudicationContract(
     Address.from(options.config.adjudicationContract),
@@ -71,7 +78,7 @@ export default async function initialize(options: SubstrateLightClientOptions) {
     deciderConfig: options.config,
     aggregatorEndpoint: options.aggregatorEndpoint
   })
-  client.registerCustomToken(
+  await client.registerCustomToken(
     new ERC20Contract(
       Address.from(options.config.PlasmaETH),
       apiPromise,
