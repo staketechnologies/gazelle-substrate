@@ -6,8 +6,8 @@ import { KeyringPair } from '@polkadot/keyring/types'
 export class SubstrateWallet implements Wallet {
   private keyPair: KeyringPair
 
-  constructor(readonly keyring: Keyring) {
-    this.keyPair = keyring.getPairs()[0]
+  constructor(readonly keyringPair: KeyringPair) {
+    this.keyPair = keyringPair
   }
 
   /**

@@ -6,10 +6,7 @@ import initialize from '@cryptoeconomicslab/substrate-plasma-light-client'
 import { Bytes, Address } from '@cryptoeconomicslab/primitives'
 import leveldown from 'leveldown'
 import { LevelKeyValueStore } from '@cryptoeconomicslab/level-kvs'
-import {
-  encodeToPolcadotCodec,
-  decodeFromPolcadotCodec
-} from '@cryptoeconomicslab/substrate-adaptor'
+import { encodeToPolcadotCodec } from '@cryptoeconomicslab/substrate-adaptor'
 import * as deciderConfig from './config.local.json'
 import { config } from 'dotenv'
 config()
@@ -19,24 +16,23 @@ const cli = Cli()
 
 const tokenAddress = deciderConfig.payoutContracts.DepositContract
 
-function getKeyring() {
+function getKeyringPair() {
   const keyringType = process.env.KEYRING_TYPE || 'SEED'
-  let keyring = new Keyring({ ss58Format: 42, type: 'ecdsa' })
+  const keyring = new Keyring({ ss58Format: 42, type: 'ecdsa' })
   if (keyringType === 'SEED') {
     const seed = stringToU8a(process.env.KEYRING_SEED)
-    keyring.addFromSeed(seed, {})
+    return keyring.addFromSeed(seed, {})
   } else if (keyringType === 'DEV') {
-    keyring.addFromUri('//Alice', { name: 'user' })
+    return keyring.addFromUri('//Alice', { name: 'user' })
   } else {
     throw new Error('unknown keyring type')
   }
-  return keyring
 }
 
 async function instantiate() {
-  const keyring = getKeyring()
+  const keyringPair = getKeyringPair()
   const kvs = new LevelKeyValueStore(Bytes.fromString('cli'), leveldown('.db'))
-  return initialize({ keyring, kvs, config: deciderConfig as any })
+  return initialize({ keyringPair, kvs, config: deciderConfig as any })
 }
 
 cli.command('deposit <amount>', 'Deposit').action(async (amount, options) => {
@@ -62,7 +58,7 @@ cli.command('deploy', 'deploy').action(async options => {
   const registry = new TypeRegistry()
   const lightClient = await instantiate()
   const api: ApiPromise = lightClient['adjudicationContract']['api']
-  const operatorKeyPair = lightClient['adjudicationContract']['operatorKeyPair']
+  const keyPair = lightClient['adjudicationContract']['keyPair']
   const operatorId = Address.from(deciderConfig.PlasmaETH)
   const erc20 = Address.from(deciderConfig.PlasmaETH)
   const stateUpdatePredicate = Address.from(
@@ -82,7 +78,7 @@ cli.command('deploy', 'deploy').action(async options => {
       encodeToPolcadotCodec(registry, exitPredicate),
       encodeToPolcadotCodec(registry, exitDepositPredicate)
     )
-    .signAndSend(operatorKeyPair, { tip: 0 })
+    .signAndSend(keyPair, { tip: '10000000000000' })
   console.log(r)
 })
 
