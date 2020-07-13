@@ -32,7 +32,7 @@ export class CommitmentContract implements ICommitmentContract {
     readonly address: Address,
     readonly eventDb: KeyValueStore,
     readonly api: ApiPromise,
-    readonly operatorKeyPair: KeyringPair
+    readonly keyPair: KeyringPair
   ) {
     this.registry = new TypeRegistry()
     // confirm that this.address.data is hex string
@@ -56,7 +56,7 @@ export class CommitmentContract implements ICommitmentContract {
         this.encodeParam(blockNumber),
         this.encodeParam(root)
       )
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   /**

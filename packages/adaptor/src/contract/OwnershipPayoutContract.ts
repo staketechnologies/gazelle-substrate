@@ -15,7 +15,7 @@ export class OwnershipPayoutContract implements IOwnershipPayoutContract {
   constructor(
     readonly address: Address,
     readonly api: ApiPromise,
-    readonly operatorKeyPair: KeyringPair
+    readonly keyPair: KeyringPair
   ) {
     this.registry = new TypeRegistry()
     this.contractId = new AccountId(this.registry, this.address.data)
@@ -45,7 +45,7 @@ export class OwnershipPayoutContract implements IOwnershipPayoutContract {
           owner
         ].map(i => this.encodeParam(i))
       )
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   private encodeParam(input: Codable): Codec {

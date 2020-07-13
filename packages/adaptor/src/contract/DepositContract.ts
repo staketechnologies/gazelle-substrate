@@ -37,7 +37,7 @@ export class DepositContract implements IDepositContract {
     readonly address: Address,
     readonly eventDb: KeyValueStore,
     readonly api: ApiPromise,
-    readonly operatorKeyPair: KeyringPair
+    readonly keyPair: KeyringPair
   ) {
     this.registry = new TypeRegistry()
     this.contractId = new AccountId(this.registry, this.address.data)
@@ -60,7 +60,7 @@ export class DepositContract implements IDepositContract {
         this.encodeParam(amount),
         this.encodeParam(initialState.toStruct())
       )
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   /**
@@ -73,7 +73,7 @@ export class DepositContract implements IDepositContract {
         this.contractId,
         this.encodeParam(checkpoint.toStruct())
       )
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   /**
@@ -87,7 +87,7 @@ export class DepositContract implements IDepositContract {
         this.contractId,
         [exit.toStruct(), depositedRangeId].map(i => this.encodeParam(i))
       )
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   /**

@@ -33,7 +33,7 @@ export class AdjudicationContract implements IAdjudicationContract {
     readonly address: Address,
     eventDb: KeyValueStore,
     readonly api: ApiPromise,
-    readonly operatorKeyPair: KeyringPair
+    readonly keyPair: KeyringPair
   ) {
     this.registry = new TypeRegistry()
     this.contractId = new AccountId(this.registry, this.address.data)
@@ -104,7 +104,7 @@ export class AdjudicationContract implements IAdjudicationContract {
   async claimProperty(property: Property): Promise<void> {
     await this.api.tx.adjudication
       .claimProperty(this.encodeParam(property.toStruct()))
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   /**
@@ -115,7 +115,7 @@ export class AdjudicationContract implements IAdjudicationContract {
   async decideClaimToTrue(gameId: Bytes): Promise<void> {
     await this.api.tx.adjudication
       .decideClaimToTrue(this.encodeParam(gameId))
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   /**
@@ -132,7 +132,7 @@ export class AdjudicationContract implements IAdjudicationContract {
       .decideClaimToFalse(
         ...[gameId, challengingGameId].map(i => this.encodeParam(i))
       )
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   async decideClaimWithWitness(
@@ -144,7 +144,7 @@ export class AdjudicationContract implements IAdjudicationContract {
         this.encodeParam(gameId),
         witnesses.map(w => this.encodeParam(w))
       )
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   /**
@@ -161,7 +161,7 @@ export class AdjudicationContract implements IAdjudicationContract {
       .removeChallenge(
         ...[gameId, challengingGameId].map(i => this.encodeParam(i))
       )
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   /**
@@ -172,7 +172,7 @@ export class AdjudicationContract implements IAdjudicationContract {
   async setPredicateDecision(gameId: Bytes, decision: boolean): Promise<void> {
     await this.api.tx.adjudication
       .removeChallenge(this.encodeParam(gameId), decision)
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   /**
@@ -193,7 +193,7 @@ export class AdjudicationContract implements IAdjudicationContract {
           this.encodeParam(i)
         )
       )
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
   }
 
   /**
