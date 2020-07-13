@@ -110,6 +110,7 @@ export class CommitmentContract implements ICommitmentContract {
   }
 
   private encodeParam(input: Codable): Codec {
+    console.log(input.raw)
     return encodeToPolcadotCodec(this.registry, input)
   }
 

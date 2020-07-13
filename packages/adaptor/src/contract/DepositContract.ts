@@ -54,7 +54,7 @@ export class DepositContract implements IDepositContract {
    * @param initialState The initial StateObject to deposit
    */
   async deposit(amount: BigNumber, initialState: Property): Promise<void> {
-    await this.api.tx.deposit
+    await this.api.tx.plasma
       .deposit(
         this.contractId,
         this.encodeParam(amount),

@@ -22,9 +22,12 @@ export class ERC20Contract implements IERC20DetailedContract {
   }
 
   public async approve(spender: Address, amount: BigNumber) {
+    return
+    /*
     await this.api.tx.commitment
       .approve(spender.data, this.encodeParam(amount))
       .signAndSend(this.operatorKeyPair, {})
+      */
   }
 
   public async decimals(): Promise<Integer> {

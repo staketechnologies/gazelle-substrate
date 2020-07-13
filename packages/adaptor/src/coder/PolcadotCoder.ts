@@ -31,10 +31,11 @@ function getVecType<T extends Codable>(l: List<T>): any {
 }
 
 function getTupleType(t: Tuple | Struct) {
-  if (t instanceof Tuple) {
-    return t.data.map(r => getTypeString(r))
-  } else if (t instanceof Struct) {
-    return t.data.map(r => getTypeString(r.value))
+  const name = t.constructor.name
+  if (name === 'Tuple') {
+    return (t as Tuple).data.map(r => getTypeString(r))
+  } else if (name === 'Struct') {
+    return (t as Struct).data.map(r => getTypeString(r.value))
   } else {
     throw new Error('Invalid type to get tuple type')
   }
@@ -43,18 +44,19 @@ function getTupleType(t: Tuple | Struct) {
 function getTypeString(
   v: Codable
 ): TypeString | Constructor<types.Tuple> | Constructor<types.Vec<Codec>> {
-  if (v instanceof Address) {
+  const name = v.constructor.name
+  if (name === 'Address') {
     return 'AccountId'
-  } else if (v instanceof Bytes || v instanceof FixedBytes) {
+  } else if (name === 'Bytes' || name === 'FixedBytes') {
     return types.Vec.with('u8')
-  } else if (v instanceof Integer || v instanceof BigNumber) {
+  } else if (name === 'Integer' || name === 'BigNumber') {
     return 'u128'
-  } else if (v instanceof List) {
-    return types.Vec.with(getVecType(v))
-  } else if (v instanceof Tuple) {
-    return types.Tuple.with(getTupleType(v))
-  } else if (v instanceof Struct) {
-    return types.Tuple.with(getTupleType(v))
+  } else if (name === 'List') {
+    return types.Vec.with(getVecType(v as any))
+  } else if (name === 'Tuple') {
+    return types.Tuple.with(getTupleType(v as Tuple))
+  } else if (name === 'Struct') {
+    return types.Tuple.with(getTupleType(v as Struct))
   }
   throw new Error(
     `Invalid type to get type string for Polcadot Abi coder: ${v.toString()}`
@@ -70,38 +72,40 @@ export function encodeToPolcadotCodec(
   registry: TypeRegistry,
   input: Codable
 ): Codec {
-  if (input instanceof Address) {
+  const name = input.constructor.name
+  if (name === 'Address') {
     return new types.GenericAccountId(
       registry,
-      Bytes.fromHexString(input.data).data
+      Bytes.fromHexString((input as Address).data).data
     )
-  } else if (input instanceof Bytes || input instanceof FixedBytes) {
+  } else if (name === 'Bytes' || name === 'FixedBytes') {
     return new types.Vec(
       registry,
       'u8',
-      Array.from(input.data).map(d => d.toString())
+      Array.from((input as Bytes).data).map(d => d.toString())
     )
-  } else if (input instanceof Integer) {
+  } else if (name === 'Integer') {
     return new types.u128(registry, input.raw)
-  } else if (input instanceof BigNumber) {
+  } else if (name === 'BigNumber') {
     return new types.u128(registry, input.raw)
-  } else if (input instanceof List) {
+  } else if (name === 'List') {
+    const list = input as any
     return new types.Vec(
       registry,
-      getVecType(input),
-      input.data.map(d => encodeToPolcadotCodec(registry, d))
+      getVecType(list),
+      list.data.map(d => encodeToPolcadotCodec(registry, d))
     )
-  } else if (input instanceof Tuple) {
+  } else if (name === 'Tuple') {
     return new types.Tuple(
       registry,
-      getTupleType(input),
-      input.data.map(d => encodeToPolcadotCodec(registry, d))
+      getTupleType(input as Tuple),
+      (input as Tuple).data.map(d => encodeToPolcadotCodec(registry, d))
     )
-  } else if (input instanceof Struct) {
+  } else if (name === 'Struct') {
     return new types.Tuple(
       registry,
-      getTupleType(input),
-      input.data.map(d => encodeToPolcadotCodec(registry, d.value))
+      getTupleType(input as Struct),
+      (input as Struct).data.map(d => encodeToPolcadotCodec(registry, d.value))
     )
   }
   throw new Error(

@@ -30,6 +30,8 @@ describe('PolcadotCoder', () => {
     test('encode BigNumber', () => {
       const encoded = PolcadotCoder.encode(BigNumber.from(100))
       expect(encoded.toHexString()).toBe('0x64000000000000000000000000000000')
+      const encoded0 = PolcadotCoder.encode(BigNumber.from(0))
+      expect(encoded0.toHexString()).toBe('0x00000000000000000000000000000000')
     })
 
     test('encode Bytes', () => {
