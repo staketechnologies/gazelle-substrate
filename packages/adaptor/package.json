@@ -33,7 +33,6 @@
     "@cryptoeconomicslab/db": "0.4.0",
     "@cryptoeconomicslab/ovm": "0.4.0",
     "@cryptoeconomicslab/plasma": "0.4.0",
-    "@cryptoeconomicslab/primitives": "0.4.0",
     "@cryptoeconomicslab/wallet": "0.4.0",
     "@polkadot/api": "^1.23.1",
     "@polkadot/keyring": "^2.17.1",
@@ -41,8 +40,7 @@
   },
   "devDependencies": {
     "@cryptoeconomicslab/coder": "^0.4.0",
-    "@cryptoeconomicslab/context": "^0.4.0",
-    "@cryptoeconomicslab/primitives": "0.4.0"
+    "@cryptoeconomicslab/context": "^0.4.0"
   },
   "peerDependencies": {
     "@cryptoeconomicslab/primitives": "^0.4.0"

@@ -25,6 +25,21 @@ import Aggregator, {
   StateManager
 } from '@cryptoeconomicslab/plasma-aggregator'
 
+function getKeyringPair() {
+  const keyringType = process.env.KEYRING_TYPE || 'SEED'
+  const keyring = new Keyring({ ss58Format: 42, type: 'ecdsa' })
+  if (keyringType === 'SEED') {
+    const seed = stringToU8a(
+      process.env.KEYRING_SEED || '12345678901234567890123456789012'
+    )
+    return keyring.addFromSeed(seed, {})
+  } else if (keyringType === 'DEV') {
+    return keyring.addFromUri('//Alice', { name: 'user' })
+  } else {
+    throw new Error('unknown keyring type')
+  }
+}
+
 const instantiate = async (): Promise<Aggregator> => {
   const kvs = new LevelKeyValueStore(
     Bytes.fromString('plasma_aggregator'),
@@ -32,11 +47,7 @@ const instantiate = async (): Promise<Aggregator> => {
   )
   await kvs.open()
 
-  const seed = stringToU8a(
-    process.env.AGGREGATOR_PRIVATE_KEY || '12345678901234567890123456789012'
-  )
-  const keyring = new Keyring({ ss58Format: 42, type: 'ed25519' })
-  keyring.addFromSeed(seed, {})
+  const keyringPair = getKeyringPair()
   const provider = new WsProvider(
     process.env.PLASM_ENDPOINT || 'ws://127.0.0.1:9944'
   )
@@ -45,7 +56,7 @@ const instantiate = async (): Promise<Aggregator> => {
     types: customTypes
   })
 
-  const wallet = new SubstrateWallet(keyring)
+  const wallet = new SubstrateWallet(keyringPair)
 
   const stateBucket = await kvs.bucket(Bytes.fromString('state_update'))
   const stateDb = new RangeDb(stateBucket)
@@ -56,20 +67,10 @@ const instantiate = async (): Promise<Aggregator> => {
   const eventDb = await kvs.bucket(Bytes.fromString('event'))
   function depositContractFactory(address: Address) {
     console.log('depositContractFactory', address)
-    return new DepositContract(
-      address,
-      eventDb,
-      apiPromise,
-      keyring.getPairs()[0]
-    )
+    return new DepositContract(address, eventDb, apiPromise, keyringPair)
   }
   function commitmentContractFactory(address: Address) {
-    return new CommitmentContract(
-      address,
-      eventDb,
-      apiPromise,
-      keyring.getPairs()[0]
-    )
+    return new CommitmentContract(address, eventDb, apiPromise, keyringPair)
   }
 
   const config = loadConfigFile(process.env.CONFIG_FILE || 'config.local.json')

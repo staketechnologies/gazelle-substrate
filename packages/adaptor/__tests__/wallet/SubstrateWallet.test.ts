@@ -16,8 +16,7 @@ describe('SubstrateWallet', () => {
 
   beforeEach(() => {
     const keyring = new Keyring({ ss58Format: 42, type: 'ed25519' })
-    keyring.addFromSeed(seed, {})
-    wallet = new SubstrateWallet(keyring)
+    wallet = new SubstrateWallet(keyring.addFromSeed(seed, {}))
   })
 
   describe('getAddress', () => {

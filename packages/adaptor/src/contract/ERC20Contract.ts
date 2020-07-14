@@ -15,16 +15,19 @@ export class ERC20Contract implements IERC20DetailedContract {
   constructor(
     readonly address: Address,
     readonly api: ApiPromise,
-    readonly operatorKeyPair: KeyringPair
+    readonly keyPair: KeyringPair
   ) {
     this.registry = new TypeRegistry()
     this.contractId = new AccountId(this.registry, this.address.data)
   }
 
   public async approve(spender: Address, amount: BigNumber) {
+    return
+    /*
     await this.api.tx.commitment
       .approve(spender.data, this.encodeParam(amount))
-      .signAndSend(this.operatorKeyPair, {})
+      .signAndSend(this.keyPair, {})
+      */
   }
 
   public async decimals(): Promise<Integer> {
