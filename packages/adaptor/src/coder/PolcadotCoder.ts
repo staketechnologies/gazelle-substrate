@@ -124,10 +124,11 @@ export function decodeFromPolcadotCodec(
   definition: Codable,
   data: any
 ): Codable {
-  if (definition instanceof Address) {
+  const name = definition.constructor.name
+  if (name === 'Address') {
     const accountId = data as types.GenericAccountId
     return new Address(accountId.toHex())
-  } else if (definition instanceof Bytes) {
+  } else if (name === 'Bytes') {
     const arr = data as types.Vec<types.u8>
     return Bytes.from(
       Uint8Array.from(
@@ -136,44 +137,48 @@ export function decodeFromPolcadotCodec(
         })
       )
     )
-  } else if (definition instanceof FixedBytes) {
+  } else if (name === 'FixedBytes') {
     const arr = data as types.Vec<types.u8>
+    const bytesDef = definition as FixedBytes
     return FixedBytes.from(
-      definition.size,
+      bytesDef.size,
       Uint8Array.from(
         arr.map(c => {
           return c.toU8a()[0]
         })
       )
     )
-  } else if (definition instanceof Integer) {
+  } else if (name === 'Integer') {
     return Integer.from(Number(data))
-  } else if (definition instanceof BigNumber) {
+  } else if (name === 'BigNumber') {
     return BigNumber.fromString(data)
-  } else if (definition instanceof List) {
+  } else if (name === 'List') {
     const arr = data as any[]
+    const listDef = definition as List<any>
     return List.from(
-      definition.getC().default(),
+      listDef.getC().default(),
       arr.map(c =>
-        decodeFromPolcadotCodec(registry, definition.getC().default(), c)
+        decodeFromPolcadotCodec(registry, listDef.getC().default(), c)
       )
     )
-  } else if (definition instanceof Tuple) {
+  } else if (name === 'Tuple') {
     const tuple = data as types.Tuple
+    const tupleDef = definition as Tuple
     return Tuple.from(
       tuple.map((c, index) => {
-        return decodeFromPolcadotCodec(registry, definition.data[index], c)
+        return decodeFromPolcadotCodec(registry, tupleDef.data[index], c)
       })
     )
-  } else if (definition instanceof Struct) {
+  } else if (name === 'Struct') {
     const tuple = data as types.Tuple
+    const structDef = definition as Struct
     return Struct.from(
       tuple.map((c, index) => {
         return {
-          key: definition.data[index].key,
+          key: structDef.data[index].key,
           value: decodeFromPolcadotCodec(
             registry,
-            definition.data[index].value,
+            structDef.data[index].value,
             c
           )
         }
@@ -185,20 +190,33 @@ export function decodeFromPolcadotCodec(
 }
 
 function innerDecode(registry: TypeRegistry, definition: Codable, data: Bytes) {
-  if (definition instanceof Address) {
+  const name = definition.constructor.name
+  if (name === 'Address') {
     return types.GenericAccountId.from(data.data)
-  } else if (definition instanceof Bytes) {
+  } else if (name === 'Bytes') {
     return types.Vec.decodeVec(registry, types.u8, data.data)
-  } else if (definition instanceof FixedBytes) {
+  } else if (name === 'FixedBytes') {
     return types.Vec.decodeVec(registry, types.u8, data.data)
-  } else if (definition instanceof Integer || definition instanceof BigNumber) {
+  } else if (name === 'Integer' || name === 'BigNumber') {
     return new types.u128(registry, data.data)
-  } else if (definition instanceof List) {
-    return types.Vec.decodeVec(registry, getVecType(definition), data.data)
-  } else if (definition instanceof Tuple) {
-    return new types.Tuple(registry, getTupleType(definition), data.data)
+  } else if (name === 'List') {
+    return types.Vec.decodeVec(
+      registry,
+      getVecType(definition as List<any>),
+      data.data
+    )
+  } else if (name === 'Tuple') {
+    return new types.Tuple(
+      registry,
+      getTupleType(definition as Tuple),
+      data.data
+    )
   } else if (definition instanceof Struct) {
-    return new types.Tuple(registry, getTupleType(definition), data.data)
+    return new types.Tuple(
+      registry,
+      getTupleType(definition as Struct),
+      data.data
+    )
   } else {
     throw new Error('method not implemented')
   }
